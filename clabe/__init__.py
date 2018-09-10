@@ -1,3 +1,5 @@
+from .types import BankCode
+
 CLABE_LENGTH = 18
 CLABE_WEIGHTS = [3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7]
 
@@ -22,4 +24,18 @@ def validate_clabe(clabe: str) -> bool:
     """
     return (clabe.isdigit() and
             len(clabe) == CLABE_LENGTH and
+            get_bank_name(clabe[0:3]) is not None and
             clabe[-1] == compute_control_digit(clabe))
+
+
+def get_bank_name(code: str) -> BankCode:
+    """
+    Regresa el nombre del banco basado en los primeros 3 digitos
+    https://es.wikipedia.org/wiki/CLABE#D.C3.ADgito_control
+    :param code: Código de 3 digitos
+    :return: Banco que corresponde al código, regresa None si no se encuentra
+    """
+    if not code.isdigit() or len(code) != 3 or not BankCode.has_value(int(code)):
+        return None
+
+    return BankCode(int(code))

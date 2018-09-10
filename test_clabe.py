@@ -12,3 +12,9 @@ def test_compute_control_digit():
 def test_validate_clabe():
     assert clabe.validate_clabe(VALID_CLABE)
     assert not clabe.validate_clabe(INVALID_CLABE)
+
+
+def test_get_bank_name():
+    assert clabe.get_bank_name('002') == clabe.BankCode.BANAMEX
+    assert clabe.get_bank_name('989') is None
+    assert clabe.get_bank_name('99999999') is None
