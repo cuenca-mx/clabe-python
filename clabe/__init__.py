@@ -24,7 +24,7 @@ def validate_clabe(clabe: str) -> bool:
     """
     return (clabe.isdigit() and
             len(clabe) == CLABE_LENGTH and
-            get_bank_name(clabe[0:3]) is not None and
+            get_bank_name(clabe[:3]) and
             clabe[-1] == compute_control_digit(clabe))
 
 

@@ -6,7 +6,7 @@ class BankCode(Enum):
     BANAMEX = '002'
     BANCOMEXT = '006'
     BANOBRAS = '009'
-    BBVABANCOMER = '012'
+    BBVA_BANCOMER = '012'
     SANTANDER = '014'
     BANJERCITO = '019'
     HSBC = '021'
