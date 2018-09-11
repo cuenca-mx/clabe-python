@@ -1,4 +1,4 @@
-from .types import BankCode
+from .banks import BankCode
 
 CLABE_LENGTH = 18
 CLABE_WEIGHTS = [3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7]
