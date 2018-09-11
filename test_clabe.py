@@ -15,6 +15,6 @@ def test_validate_clabe():
 
 
 def test_get_bank_name():
-    assert clabe.get_bank_name('002') == clabe.BankCode.BANAMEX
+    assert clabe.get_bank_name('002') == 'BANAMEX'
     assert clabe.get_bank_name('989') is None
     assert clabe.get_bank_name('99999999') is None

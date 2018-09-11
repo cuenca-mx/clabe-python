@@ -28,14 +28,16 @@ def validate_clabe(clabe: str) -> bool:
             clabe[-1] == compute_control_digit(clabe))
 
 
-def get_bank_name(code: str) -> BankCode:
+def get_bank_name(code: str) -> str:
     """
     Regresa el nombre del banco basado en los primeros 3 digitos
     https://es.wikipedia.org/wiki/CLABE#D.C3.ADgito_control
     :param code: Código de 3 digitos
     :return: Banco que corresponde al código, regresa None si no se encuentra
     """
-    if not code.isdigit() or len(code) != 3 or not BankCode.has_value(int(code)):
+    try:
+        bank = BankCode(code)
+    except ValueError:
         return None
-
-    return BankCode(int(code))
+    else:
+        return bank.name
