@@ -17,7 +17,8 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     extras_require={
         'dev': [
-            'pytest>=3'
+            'pytest>=3',
+            'pycodestyle'
         ]
     },
     classifiers=[
