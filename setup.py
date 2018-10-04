@@ -7,7 +7,7 @@ with open('README.md', 'r') as f:
 
 setuptools.setup(
     name='clabe',
-    version='0.1',
+    version='0.1.1',
     author='Cuenca',
     author_email='dev@cuenca.com',
     description='Validate and generate the control digit of a CLABE in Mexico',
