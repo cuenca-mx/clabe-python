@@ -29,24 +29,28 @@ $ make test
 
 Obtener el dígito de control de un número CLABE
 
-``` Python
+```python
 import clabe
-
-clabe.compute_control_digit(clabe_number)
+clabe.compute_control_digit('03218000011835971')
 ```
 
 Para validar si un número CLABE es válido
 
-``` Python
+```python
 import clabe
-
-clabe.validate_clabe(clabe_number)
+clabe.validate_clabe('032180000118359719')
 ```
 
 Para obtener el banco a partir de 3 dígitos
 
-``` Python
+```python
 import clabe
-
 clabe.get_bank_name('002')
+```
+
+Para generar nuevo válido CLABES
+
+```python
+import clabe
+clabe.generate_new_clabes(10, '03218000011')
 ```
