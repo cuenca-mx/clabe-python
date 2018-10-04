@@ -14,10 +14,10 @@ venv:
 		pip install --quiet --upgrade pip
 
 test: clean-pyc install-dev lint
-		pytest
+		pytest -v
 
 lint:
-		pycodestyle setup.py clabe/
+		pycodestyle setup.py test_clabe.py clabe/
 
 clean-pyc:
 		find . -name '*.pyc' -exec rm -f {} +
