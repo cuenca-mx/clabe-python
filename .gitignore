@@ -10,3 +10,4 @@ build/
 .cache/
 .pytest_cache/
 .idea/
+.eggs/
