@@ -13,18 +13,19 @@ venv:
 		source venv/bin/activate
 		pip install --quiet --upgrade pip
 
-test: clean-pyc install-dev lint
+test: clean install-dev lint
 		python setup.py test
 
 lint:
 		pycodestyle setup.py test_clabe.py clabe/
 
-clean-pyc:
+clean:
 		find . -name '*.pyc' -exec rm -f {} +
 		find . -name '*.pyo' -exec rm -f {} +
 		find . -name '*~' -exec rm -f {} +
+		rm -rf build dist clabe.egg-info
 
-release: clean-pyc
+release: clean
 		python setup.py sdist bdist_wheel
 		twine upload dist/*
 
