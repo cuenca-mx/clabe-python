@@ -13,7 +13,7 @@ venv:
 		source venv/bin/activate
 		pip install --quiet --upgrade pip
 
-test: clean-pyc lint
+test: clean-pyc install-dev lint
 		python setup.py test
 
 lint:
