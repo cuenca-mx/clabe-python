@@ -1,5 +1,5 @@
 import random
-from typing import Union
+from typing import List, Union
 
 from .banks import BankCode
 
@@ -47,7 +47,7 @@ def get_bank_name(code: str) -> Union[str, None]:
         return bank.name
 
 
-def generate_new_clabes(number_of_clabes, prefix):
+def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
     clabes = []
     missing = CLABE_LENGTH - len(prefix) - 1
     assert (10 ** missing - 10 ** (missing - 1)) >= number_of_clabes
