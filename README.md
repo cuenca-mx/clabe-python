@@ -4,7 +4,6 @@
 
 [![PyPI](https://img.shields.io/pypi/v/clabe.svg)](https://pypi.org/project/clabe/)
 
-
 Librería para validar y calcular un número CLABE basado en
 https://es.wikipedia.org/wiki/CLABE
 
