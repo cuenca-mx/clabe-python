@@ -15,6 +15,14 @@ jobs:
       python: 3.7
       dist: xenial
       sudo: true
+    - stage: code coverage
+      python: 3.7
+      dist: xenial
+      sudo: true
+      install: pip install coveralls
+      script:
+      - coverage run --source=arcus setup.py test
+      - coveralls
     - stage: PyPI Upload
       python: 3.7
       dist: xenial
