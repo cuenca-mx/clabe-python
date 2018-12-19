@@ -1,6 +1,42 @@
+notifications:
+  slack: cuencafinance:6N0IaVciA0KyNylSTq5ZzW4I
+
 language: python
-python:
-  - "3.5"
-  - "3.6"
-  - "3.7-dev"
-script: make test
+
+script: python setup.py test
+
+jobs:
+  include:
+    - stage: test
+      python: 3.5
+    - stage: test
+      python: 3.6
+    - stage: test
+      python: 3.7
+      dist: xenial
+      sudo: true
+    - stage: code coverage
+      python: 3.7
+      dist: xenial
+      sudo: true
+      install: pip install coveralls
+      script:
+      - coverage run --source=arcus setup.py test
+      - coveralls
+    - stage: PyPI Upload
+      python: 3.7
+      dist: xenial
+      sudo: true
+      script: echo "Uploading packages to PyPI"
+      deploy:
+        provider: pypi
+        user: JessicaShalomG
+        password:
+            secure: "BOKg2Ffkr/56KOE9XiCtMGnr8XeU/pwO/dnnqrJ18U5Bty7R07SC2Fi0t/Nf/5eAlOsHy3JTTe0U6psxJwoPEFV2lwy93vLvg5AA64zeQo41l/tXBAXzGBAFv7fc4HUO2W6Da1TON7T+RJLYiY5Nr9DN+g3o8y3SHFwPtxfiQXtLjROSrb9tPYCTVZ6/MQHrGz6odpVSgeCu92xHsyR6CBe8o8uuh0rYnCqRpMNBpECHwe992jFc8/RyzAUlVCxf2K9aAdtvUEDpkViijrri5EwgV/EDGnAnhgNq1It0Q0l+OBWJaKm9gXwMFI2Crl9NkfmKk2akNuiZ+oj3IPjeEidGK2BKkeVH6BcD0IMeEVSbJ2+iYE8nBr3nDJgrV8SzToI/UJe11bKtMfuI8MnPGSbHASqVaY1tFbYeRid8ZzGViAiipyh9iJmlIGb+z6juWFN42QDATbGRYIlVgqmTkZ9NB2qm1tDCFXAmRwPA4CKTTeOogVMTolsyF348EjnGAIPhnS53fX5VpdxK3QSY1hrVjx4z2qMqsGKdaXCYL4ZokUxI5WWJ0nYGTcd3vHwXzkB0O9KSSFaHddb9mw4S6uEm1pQmvh2dW/0dVnrXWog5FHYhn+eDG5SSoxB+eFBD7iSTATpcXSzcdefMiFxJvVUo8TbxetO0F9f6CZHMSg8="
+        on:
+          tags: true
+        distributions: sdist bdist_wheel
+
+
+
+travis encrypt "PcBPxGatiDrwwXuPvRQRB6nsGHWXRQk,tXtJi4yhhUnGaRzKbXrcfQsoEZgFT\(fb" --add --com
