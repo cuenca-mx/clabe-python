@@ -32,11 +32,8 @@ jobs:
         provider: pypi
         user: JessicaShalomG
         password:
-            secure: "BOKg2Ffkr/56KOE9XiCtMGnr8XeU/pwO/dnnqrJ18U5Bty7R07SC2Fi0t/Nf/5eAlOsHy3JTTe0U6psxJwoPEFV2lwy93vLvg5AA64zeQo41l/tXBAXzGBAFv7fc4HUO2W6Da1TON7T+RJLYiY5Nr9DN+g3o8y3SHFwPtxfiQXtLjROSrb9tPYCTVZ6/MQHrGz6odpVSgeCu92xHsyR6CBe8o8uuh0rYnCqRpMNBpECHwe992jFc8/RyzAUlVCxf2K9aAdtvUEDpkViijrri5EwgV/EDGnAnhgNq1It0Q0l+OBWJaKm9gXwMFI2Crl9NkfmKk2akNuiZ+oj3IPjeEidGK2BKkeVH6BcD0IMeEVSbJ2+iYE8nBr3nDJgrV8SzToI/UJe11bKtMfuI8MnPGSbHASqVaY1tFbYeRid8ZzGViAiipyh9iJmlIGb+z6juWFN42QDATbGRYIlVgqmTkZ9NB2qm1tDCFXAmRwPA4CKTTeOogVMTolsyF348EjnGAIPhnS53fX5VpdxK3QSY1hrVjx4z2qMqsGKdaXCYL4ZokUxI5WWJ0nYGTcd3vHwXzkB0O9KSSFaHddb9mw4S6uEm1pQmvh2dW/0dVnrXWog5FHYhn+eDG5SSoxB+eFBD7iSTATpcXSzcdefMiFxJvVUo8TbxetO0F9f6CZHMSg8="
+            secure: "W99WixhxbtzmZN9k220c5kpicILgAagmEiWdmp817608waNi3TVtgt7j1uF8iaSAZZWyUGD3ppsYH0YHkyFgXugFQ6dcQ7aUvHfuFVSzTFObCeYBzimpaYuB56o9PTc5UaaF7se1DemsUFeqoFS9yevtDyTruj+QqkN+3grdLpgqfAPzhKTZOGqHF0KC+xgraU9lGq+w1Zz/Rx7Y3G0td9kA06+CupMAfs8Q2bMxOiT7UMe4wizRKYsgDGdVWsnNjDdeVkf6LY1SiLHtg2qo/56eBFfbcFzkvSozmvwJoEwlF0q13IMoTSi2SIf38SJ2asUzGprLdbB4mYupGM1b0C67cG8Sfs6j0ugKTzqWyaejBtI/Poj8lPkNe795j2NqzIgjlVMipbIn9mbkqQIzCawpB5rCavcbCo5orNukKz70UlShUZSGNP+ji+BUDJ2/mRXMr4jt2kQRJAe/bYrd6tXjybv0XyJnp5Hvci8u4C6E14FnfvHJaebZgdk47nVXu1LAcVcFVUeFWOtIVgxE1oPBKsdnPqG5IbXOnwkVbndViE7YotSlzISFzTMKFtpcHzNpnIOh1D25XDbDetVm1dxoK1h5dN75dm2F/Kwy6n/zdRny5aIM/eON+cvBzYQXKZuxDdcWTmz/CIkBMx/NwGHDjxnXy0ExZnfvs3C6wVs="
+
         on:
           tags: true
         distributions: sdist bdist_wheel
-
-
-
-travis encrypt "PcBPxGatiDrwwXuPvRQRB6nsGHWXRQk,tXtJi4yhhUnGaRzKbXrcfQsoEZgFT\(fb" --add --com
