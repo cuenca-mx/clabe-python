@@ -25,9 +25,4 @@ clean:
 		find . -name '*~' -exec rm -f {} +
 		rm -rf build dist clabe.egg-info
 
-release: clean
-		python setup.py sdist bdist_wheel
-		twine upload dist/*
-
-
 .PHONY: all install-dev release test clean-pyc
