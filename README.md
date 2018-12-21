@@ -18,9 +18,9 @@ Se puede instalar desde Pypi usando
 pip install clabe
 ```
 
-## Test
+## Pruebas
 
-Para ejecutar los test utlizando el archivo Makefile
+Para ejecutar las pruebas
 
 ```
 $ make test
