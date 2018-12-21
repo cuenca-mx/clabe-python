@@ -3,7 +3,9 @@ notifications:
 
 language: python
 
-script: python setup.py test
+script:
+    - pycodestyle
+    - python setup.py test
 
 jobs:
   include:
