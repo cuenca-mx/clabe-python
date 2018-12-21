@@ -21,7 +21,7 @@ jobs:
       sudo: true
       install: pip install coveralls
       script:
-      - coverage run --source=arcus setup.py test
+      - coverage run --source=clabe setup.py test
       - coveralls
     - stage: PyPI Upload
       python: 3.7
@@ -30,10 +30,10 @@ jobs:
       script: echo "Uploading packages to PyPI"
       deploy:
         provider: pypi
-        user: JessicaShalomG
+        user: cuenca
         password:
-            secure: "W99WixhxbtzmZN9k220c5kpicILgAagmEiWdmp817608waNi3TVtgt7j1uF8iaSAZZWyUGD3ppsYH0YHkyFgXugFQ6dcQ7aUvHfuFVSzTFObCeYBzimpaYuB56o9PTc5UaaF7se1DemsUFeqoFS9yevtDyTruj+QqkN+3grdLpgqfAPzhKTZOGqHF0KC+xgraU9lGq+w1Zz/Rx7Y3G0td9kA06+CupMAfs8Q2bMxOiT7UMe4wizRKYsgDGdVWsnNjDdeVkf6LY1SiLHtg2qo/56eBFfbcFzkvSozmvwJoEwlF0q13IMoTSi2SIf38SJ2asUzGprLdbB4mYupGM1b0C67cG8Sfs6j0ugKTzqWyaejBtI/Poj8lPkNe795j2NqzIgjlVMipbIn9mbkqQIzCawpB5rCavcbCo5orNukKz70UlShUZSGNP+ji+BUDJ2/mRXMr4jt2kQRJAe/bYrd6tXjybv0XyJnp5Hvci8u4C6E14FnfvHJaebZgdk47nVXu1LAcVcFVUeFWOtIVgxE1oPBKsdnPqG5IbXOnwkVbndViE7YotSlzISFzTMKFtpcHzNpnIOh1D25XDbDetVm1dxoK1h5dN75dm2F/Kwy6n/zdRny5aIM/eON+cvBzYQXKZuxDdcWTmz/CIkBMx/NwGHDjxnXy0ExZnfvs3C6wVs="
-
+            secure: "AA3D6G89zl69F09IsasFluO0Q9XuGGQzHO+XSwnOhp9zOHx/fKXc5JM9K+3BgH9GEhTc4fCgp3glXbjDpRsmVUCpC5nFOIWyLyMESb9o1PFqxQllapWb4u9+19cND8qOlNeIMuTO6Akawo05GKaeFqiX0w2/ekPT9PBjdV2Hamm1HF1kAyIsh1fNqdK54300K9ZGDg0WU0YKJ3lpXB514z9A63TvDTBJKmTweJU1GdsleHR7fJ9XmSc3oeKh8Mq4nWyJyMDbQtHfs1NgJkPYQWoUm+TsPQPaS+xGocrmCqCxTH53gRV1BICho40Eicg9YiDFA0Vhnj/KvMvMpiTVF5wiIBbAl5JRtJtamLtcxTwnJQqRnu7yfN1Azw7nLXHG1Kq/OwVy+W+SJoYVnqCH+TLvlSOrsIb/5t8IlD9m67z8qAdjbKKOQeU6LD+cJtdBrDMNw4FLHZPefBRsRJ6RNrgMwz3kzbVrmTyCNms/cXsYoq0pO6SgyleQE+WksFgRxe145V5VAer7WhYDyoFN2QN23IOIN/DDid4FyklbjS/3V/SvkzXC7l1zE1EaH4wwFofKMwZo1uKYqWrQyN0dWs32NTSOesZSITWiH0DShXZowtz6WehVUBDRZFfs7NU6mNZjKTjH76kL0wUoS3ShUSBqMJBfjG/EF1LHyr1xYG4="
+            
         on:
           tags: true
         distributions: sdist bdist_wheel
