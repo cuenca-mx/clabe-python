@@ -1,4 +1,4 @@
-## CLABE
+# CLABE
 
 [![Build Status](https://travis-ci.com/cuenca-mx/clabe-python.svg?branch=master)](https://travis-ci.com/cuenca-mx/clabe-python)
 [![PyPI](https://img.shields.io/pypi/v/clabe.svg)](https://pypi.org/project/clabe/)
@@ -6,11 +6,11 @@
 Librería para validar y calcular un número CLABE basado en
 https://es.wikipedia.org/wiki/CLABE
 
-**Requerimientos**
+## Requerimientos
 
-Python v3 o superior.
+Python 3.5 o superior.
 
-**Instalación**
+## Instalación
 
 Se puede instalar desde Pypi usando
 
@@ -18,7 +18,7 @@ Se puede instalar desde Pypi usando
 pip install clabe
 ```
 
-**Test**
+## Test
 
 Para ejecutar los test utlizando el archivo Makefile
 
@@ -26,7 +26,7 @@ Para ejecutar los test utlizando el archivo Makefile
 $ make test
 ```
 
-**Uso básico**
+## Uso básico
 
 Obtener el dígito de control de un número CLABE
 
@@ -55,3 +55,12 @@ Para generar nuevo válido CLABES
 import clabe
 clabe.generate_new_clabes(10, '03218000011')
 ```
+
+## Subir a PyPi
+
+1. Actualizar version en `setup.py`
+1. Commit cambios a `setup.py` y empujarlos a `origin/master`
+1. `git tag -a <version> -m <release message>`
+1. `git push origin --tags`
+
+TravisCI subirá la version actualizada a PyPi despues de verificar que las pruebas pasen.
