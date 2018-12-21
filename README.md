@@ -1,6 +1,6 @@
 ## CLABE
 
-[![Build Status](https://travis-ci.com/cuenca-mx/clabe-python.svg?branch=master)](https://travis-ci.com/cuenca-mx/clabe)
+[![Build Status](https://travis-ci.com/cuenca-mx/clabe-python.svg?branch=master)](https://travis-ci.com/cuenca-mx/clabe-python)
 [![PyPI](https://img.shields.io/pypi/v/clabe.svg)](https://pypi.org/project/clabe/)
 
 Librería para validar y calcular un número CLABE basado en
