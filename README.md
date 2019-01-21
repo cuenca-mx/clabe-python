@@ -33,14 +33,14 @@ Obtener el dígito de control de un número CLABE
 
 ```python
 import clabe
-clabe.compute_control_digit('03218000011835971')
+clabe.compute_control_digit('00200000000000000')
 ```
 
 Para validar si un número CLABE es válido
 
 ```python
 import clabe
-clabe.validate_clabe('032180000118359719')
+clabe.validate_clabe('002000000000000008')
 ```
 
 Para obtener el banco a partir de 3 dígitos
@@ -54,7 +54,7 @@ Para generar nuevo válido CLABES
 
 ```python
 import clabe
-clabe.generate_new_clabes(10, '03218000011')
+clabe.generate_new_clabes(10, '002123456')
 ```
 
 ## Subir a PyPi
