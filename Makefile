@@ -29,4 +29,4 @@ clean:
 		find . -name '*~' -exec rm -f {} +
 		rm -rf build dist clabe.egg-info
 
-.PHONY: all install-dev release test clean-pyc
+.PHONY: all coverage lint install-dev release test clean
