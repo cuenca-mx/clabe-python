@@ -1,7 +1,7 @@
 import random
-from typing import List, Union
+from typing import List
 
-from .banks import BankCode
+from .banks import BANKS, BANK_NAMES
 
 
 CLABE_LENGTH = 18
@@ -28,23 +28,22 @@ def validate_clabe(clabe: str) -> bool:
     """
     return (clabe.isdigit() and
             len(clabe) == CLABE_LENGTH and
-            get_bank_name(clabe[:3]) and
+            clabe[:3] in BANKS.keys() and
             clabe[-1] == compute_control_digit(clabe))
 
 
-def get_bank_name(code: str) -> Union[str, None]:
+def get_bank_name(clabe: str) -> str:
     """
     Regresa el nombre del banco basado en los primeros 3 digitos
     https://es.wikipedia.org/wiki/CLABE#D.C3.ADgito_control
-    :param code: Código de 3 digitos
-    :return: Banco que corresponde al código, regresa None si no se encuentra
     """
+    code = clabe[:3]
     try:
-        bank = BankCode(code)
-    except ValueError:
-        return None
+        bank_name = BANK_NAMES[BANKS[code]]
+    except KeyError:
+        raise ValueError(f"Ningún banco tiene código '{code}'")
     else:
-        return bank.name
+        return bank_name
 
 
 def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:

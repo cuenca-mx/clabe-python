@@ -16,6 +16,10 @@ venv:
 test: clean install-dev lint
 		python setup.py test
 
+coverage: clean install-dev lint
+		coverage run --source=clabe setup.py test
+		coverage report -m
+
 lint:
 		pycodestyle setup.py test_clabe.py clabe/
 
