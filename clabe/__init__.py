@@ -16,3 +16,4 @@ from .validations import (
     get_bank_name,
     validate_clabe,
 )
+from .version import __version__

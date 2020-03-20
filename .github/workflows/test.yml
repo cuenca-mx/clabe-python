@@ -30,4 +30,4 @@ jobs:
     - name: Install dependencies
       run: make install-test
     - name: Run tests
-      run: pytest --vcr-record=none
+      run: pytest
