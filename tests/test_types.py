@@ -1,9 +1,28 @@
 import pytest
+from pydantic import BaseModel
 from pydantic.errors import NotDigitError
 
-from clabe import compute_control_digit
+from clabe import BANKS, BANK_NAMES, compute_control_digit
 from clabe.exc import BankCodeValidationError, ClabeControlDigitValidationError
 from clabe.types import Clabe, validate_digits
+
+
+VALID_CLABE = '646180157042875763'
+
+
+class Cuenta(BaseModel):
+    clabe: Clabe
+
+
+def test_valid_clabe():
+    cuenta = Cuenta(clabe=VALID_CLABE)
+    assert cuenta.clabe.bank_code_3_digits == '646'
+    assert cuenta.clabe.bank_code_5_digits == BANKS['646']
+    assert cuenta.clabe.bank_name == BANK_NAMES[BANKS['646']]
+
+
+def test_clabe_digits():
+    assert validate_digits(VALID_CLABE)
 
 
 def test_clabe_not_digit():

@@ -33,7 +33,6 @@ class Clabe(str):
         self.bank_code_3_digits = clabe[:3]
         self.bank_code_5_digits = BANKS[clabe[:3]]
         self.bank_name = BANK_NAMES[self.bank_code_5_digits]
-        super().__init__(clabe)
 
     @classmethod
     def __get_validators__(cls) -> 'CallableGenerator':
