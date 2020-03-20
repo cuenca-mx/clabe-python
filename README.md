@@ -1,6 +1,6 @@
 # CLABE
 
-[![Build Status](https://travis-ci.com/cuenca-mx/clabe-python.svg?branch=master)](https://travis-ci.com/cuenca-mx/clabe-python)
+![Build Status](https://github.com/cuenca-mx/clabe-python/workflows/test/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/cuenca-mx/clabe-python/badge.svg?branch=master)](https://coveralls.io/github/cuenca-mx/clabe-python?branch=master)
 [![PyPI](https://img.shields.io/pypi/v/clabe.svg)](https://pypi.org/project/clabe/)
 
