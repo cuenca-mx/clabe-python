@@ -1,32 +1,42 @@
 SHELL := bash
 PATH := ./venv/bin:${PATH}
-PYTHON=python3.7
+PYTHON = python3.7
+PROJECT = clabe
+isort = isort -rc -ac $(PROJECT) tests setup.py
+black = black -S -l 79 --target-version py37 $(PROJECT) tests setup.py
 
 
 all: test
 
-install-dev:
-		pip install -q -e .[dev]
-
 venv:
-		$(PYTHON) -m venv --prompt clabe venv
-		source venv/bin/activate
-		pip install --quiet --upgrade pip
+		$(PYTHON) -m venv --prompt $(PROJECT) venv
+		pip install -qU pip
 
-test: clean install-dev lint
+install-test:
+		pip install -q .[test]
+
+test: clean install-test lint
 		python setup.py test
 
-coverage: clean install-dev lint
-		coverage run --source=clabe setup.py test
-		coverage report -m
+format:
+		$(isort)
+		$(black)
 
 lint:
-		pycodestyle setup.py test_clabe.py clabe/
+		flake8 $(PROJECT) tests setup.py
+		$(isort) --check-only
+		$(black) --check
+		mypy $(PROJECT) tests
 
 clean:
 		find . -name '*.pyc' -exec rm -f {} +
 		find . -name '*.pyo' -exec rm -f {} +
 		find . -name '*~' -exec rm -f {} +
-		rm -rf build dist clabe.egg-info
+		rm -rf build dist $(PROJECT).egg-info
 
-.PHONY: all coverage lint install-dev release test clean
+release: clean
+		python setup.py sdist bdist_wheel
+		twine upload dist/*
+
+
+.PHONY: all install-test test format lint clean release
