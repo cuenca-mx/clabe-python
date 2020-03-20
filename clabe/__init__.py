@@ -1,4 +1,5 @@
 __all__ = [
+    '__version__',
     'BANK_NAMES',
     'BANKS',
     'Clabe',
