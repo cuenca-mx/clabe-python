@@ -1,6 +1,6 @@
 # CLABE
 
-![test](https://github.com/cuenca-mx/clabe-python/workflows/test/badge.svg?branch=pydantic)[![Coverage Status](https://coveralls.io/repos/github/cuenca-mx/clabe-python/badge.svg?branch=master)](https://coveralls.io/github/cuenca-mx/clabe-python?branch=master)
+![test](https://github.com/cuenca-mx/clabe-python/workflows/test/badge.svg?branch=pydantic)
 [![codecov](https://codecov.io/gh/cuenca-mx/clabe-python/branch/master/graph/badge.svg)](https://codecov.io/gh/cuenca-mx/clabe-python)
 [![PyPI](https://img.shields.io/pypi/v/clabe.svg)](https://pypi.org/project/clabe/)
 
