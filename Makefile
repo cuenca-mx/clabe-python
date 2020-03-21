@@ -9,24 +9,24 @@ black = black -S -l 79 --target-version py38 $(PROJECT) tests setup.py
 all: test
 
 venv:
-		$(PYTHON) -m venv --prompt $(PROJECT) venv
-		pip install -qU pip
+	$(PYTHON) -m venv --prompt $(PROJECT) venv
+	pip install -qU pip
 
 install-test:
-		pip install -q .[test]
+	pip install -q .[test]
 
 test: clean install-test lint
-		python setup.py test
+	python setup.py test
 
 format:
-		$(isort)
-		$(black)
+	$(isort)
+	$(black)
 
 lint:
-		flake8 $(PROJECT) tests setup.py
-		$(isort) --check-only
-		$(black) --check
-		mypy $(PROJECT) tests
+	flake8 $(PROJECT) tests setup.py
+	$(isort) --check-only
+	$(black) --check
+	mypy $(PROJECT) tests
 
 clean:
 	rm -rf `find . -name __pycache__`
@@ -44,8 +44,8 @@ clean:
 	rm -rf dist
 
 release: clean
-		python setup.py sdist bdist_wheel
-		twine upload dist/*
+	python setup.py sdist bdist_wheel
+	twine upload dist/*
 
 
 .PHONY: all install-test test format lint clean release
