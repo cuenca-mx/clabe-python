@@ -1,32 +1,51 @@
 SHELL := bash
 PATH := ./venv/bin:${PATH}
-PYTHON=python3.7
+PYTHON = python3.7
+PROJECT = clabe
+isort = isort -rc -ac $(PROJECT) tests setup.py
+black = black -S -l 79 --target-version py38 $(PROJECT) tests setup.py
 
 
 all: test
 
-install-dev:
-		pip install -q -e .[dev]
-
 venv:
-		$(PYTHON) -m venv --prompt clabe venv
-		source venv/bin/activate
-		pip install --quiet --upgrade pip
+	$(PYTHON) -m venv --prompt $(PROJECT) venv
+	pip install -qU pip
 
-test: clean install-dev lint
-		python setup.py test
+install-test:
+	pip install -q .[test]
 
-coverage: clean install-dev lint
-		coverage run --source=clabe setup.py test
-		coverage report -m
+test: clean install-test lint
+	python setup.py test
+
+format:
+	$(isort)
+	$(black)
 
 lint:
-		pycodestyle setup.py test_clabe.py clabe/
+	flake8 $(PROJECT) tests setup.py
+	$(isort) --check-only
+	$(black) --check
+	mypy $(PROJECT) tests
 
 clean:
-		find . -name '*.pyc' -exec rm -f {} +
-		find . -name '*.pyo' -exec rm -f {} +
-		find . -name '*~' -exec rm -f {} +
-		rm -rf build dist clabe.egg-info
+	rm -rf `find . -name __pycache__`
+	rm -f `find . -type f -name '*.py[co]' `
+	rm -f `find . -type f -name '*~' `
+	rm -f `find . -type f -name '.*~' `
+	rm -rf .cache
+	rm -rf .pytest_cache
+	rm -rf .mypy_cache
+	rm -rf htmlcov
+	rm -rf *.egg-info
+	rm -f .coverage
+	rm -f .coverage.*
+	rm -rf build
+	rm -rf dist
 
-.PHONY: all coverage lint install-dev release test clean
+release: clean
+	python setup.py sdist bdist_wheel
+	twine upload dist/*
+
+
+.PHONY: all install-test test format lint clean release

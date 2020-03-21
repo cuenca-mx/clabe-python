@@ -1,7 +1,7 @@
 # CLABE
 
-[![Build Status](https://travis-ci.com/cuenca-mx/clabe-python.svg?branch=master)](https://travis-ci.com/cuenca-mx/clabe-python)
-[![Coverage Status](https://coveralls.io/repos/github/cuenca-mx/clabe-python/badge.svg?branch=master)](https://coveralls.io/github/cuenca-mx/clabe-python?branch=master)
+[![test](https://github.com/cuenca-mx/clabe-python/workflows/test/badge.svg)](https://github.com/cuenca-mx/clabe-python/actions?query=workflow%3Atest)
+[![codecov](https://codecov.io/gh/cuenca-mx/clabe-python/branch/master/graph/badge.svg)](https://codecov.io/gh/cuenca-mx/clabe-python)
 [![PyPI](https://img.shields.io/pypi/v/clabe.svg)](https://pypi.org/project/clabe/)
 
 Librería para validar y calcular un número CLABE basado en

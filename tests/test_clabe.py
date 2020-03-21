@@ -1,8 +1,11 @@
 import pytest
 
 from clabe import (
-    compute_control_digit, generate_new_clabes, get_bank_name, validate_clabe)
-
+    compute_control_digit,
+    generate_new_clabes,
+    get_bank_name,
+    validate_clabe,
+)
 
 VALID_CLABE = '002000000000000008'
 INVALID_CLABE_CONTROL_DIGIT = '002000000000000007'
