@@ -45,7 +45,7 @@ jobs:
       - name: Generate coverage report
         run: |
           pytest --cov=clabe --cov-report=xml
-          ls -R
+          ls -aR
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
