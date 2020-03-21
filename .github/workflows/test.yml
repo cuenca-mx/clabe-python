@@ -44,7 +44,7 @@ jobs:
         run: make install-test
       - name: Generate coverage report
         run: |
-          pytest --cov-report=xml
+          pytest --cov=clabe --cov-report=xml
           ls -R
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
