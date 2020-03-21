@@ -56,12 +56,3 @@ Para generar nuevo válido CLABES
 import clabe
 clabe.generate_new_clabes(10, '002123456')
 ```
-
-## Subir a PyPi
-
-1. Actualizar version en `setup.py`
-1. Commit cambios a `setup.py` y empujarlos a `origin/master`
-1. `git tag -a <version> -m <release message>`
-1. `git push origin --tags`
-
-TravisCI subirá la version actualizada a PyPi despues de verificar que las pruebas pasen.
