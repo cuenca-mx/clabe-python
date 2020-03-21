@@ -10,7 +10,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: '3.8'
+          python-version: 3.8
       - name: Install dependencies
         run: make install-test
       - name: Lint
@@ -43,10 +43,7 @@ jobs:
       - name: Install dependencies
         run: make install-test
       - name: Generate coverage report
-        run: |
-          pytest --cov-report=xml
-          ls -alR
-          cat coverage.xml
+        run: pytest --cov-report=xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
