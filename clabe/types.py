@@ -11,7 +11,7 @@ from . import exc
 from .validations import BANK_NAMES, BANKS, compute_control_digit
 
 if TYPE_CHECKING:
-    from pydantic.typing import CallableGenerator  # pragma: no cover
+    from pydantic.typing import CallableGenerator
 
 
 def validate_digits(v: str) -> str:
