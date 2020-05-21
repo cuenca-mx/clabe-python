@@ -30,7 +30,7 @@ setuptools.setup(
     url='https://github.com/cuenca-mx/clabe',
     packages=setuptools.find_packages(),
     include_package_data=True,
-    package_data=dict(mati=['py.typed']),
+    package_data=dict(clabe=['py.typed']),
     install_requires=['pydantic>=1.4,<2.0'],
     setup_requires=['pytest-runner'],
     tests_require=test_requires,
