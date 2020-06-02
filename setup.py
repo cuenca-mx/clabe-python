@@ -6,7 +6,7 @@ version = SourceFileLoader('version', 'clabe/version.py').load_module()
 
 
 test_requires = [
-    'pytest<5.2',
+    'pytest',
     'coverage<5',
     'pytest-cov',
     'black',
