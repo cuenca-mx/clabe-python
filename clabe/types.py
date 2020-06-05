@@ -30,9 +30,9 @@ class Clabe(str):
     max_length: ClassVar[int] = 18
 
     def __init__(self, clabe: str):
-        self.bank_code_3_digits = clabe[:3]
-        self.bank_code_5_digits = BANKS[clabe[:3]]
-        self.bank_name = BANK_NAMES[self.bank_code_5_digits]
+        self.prefix = clabe[:3]
+        self.bank_code = BANKS[clabe[:3]]
+        self.bank_name = BANK_NAMES[self.bank_code]
 
     @classmethod
     def __get_validators__(cls) -> 'CallableGenerator':
