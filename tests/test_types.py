@@ -15,8 +15,8 @@ class Cuenta(BaseModel):
 
 def test_valid_clabe():
     cuenta = Cuenta(clabe=VALID_CLABE)
-    assert cuenta.clabe.prefix == '646'
-    assert cuenta.clabe.bank_code == BANKS['646']
+    assert cuenta.clabe.bank_code_abm == '646'
+    assert cuenta.clabe.bank_code_banxico == BANKS['646']
     assert cuenta.clabe.bank_name == BANK_NAMES[BANKS['646']]
 
 
