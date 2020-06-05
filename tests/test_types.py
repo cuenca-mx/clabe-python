@@ -29,11 +29,11 @@ def test_clabe_not_digit():
         validate_digits('h' * 18)
 
 
-def test_invalid_bank_code():
+def test_invalid_bank_code_abm():
     clabe = '9' * 17
     clabe += compute_control_digit(clabe)
     with pytest.raises(BankCodeValidationError):
-        Clabe.validate_bank_code(clabe)
+        Clabe.validate_bank_code_abm(clabe)
 
 
 def test_invalid_control_digit():

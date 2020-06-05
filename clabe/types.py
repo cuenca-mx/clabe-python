@@ -40,12 +40,12 @@ class Clabe(str):
         yield constr_strip_whitespace
         yield constr_length_validator
         yield validate_digits
-        yield cls.validate_bank_code
+        yield cls.validate_bank_code_abm
         yield cls.validate_control_digit
         yield cls
 
     @classmethod
-    def validate_bank_code(cls, clabe: str) -> str:
+    def validate_bank_code_abm(cls, clabe: str) -> str:
         if clabe[:3] not in BANKS.keys():
             raise exc.BankCodeValidationError
         return clabe
