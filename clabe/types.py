@@ -30,9 +30,9 @@ class Clabe(str):
     max_length: ClassVar[int] = 18
 
     def __init__(self, clabe: str):
-        self.bank_code_3_digits = clabe[:3]
-        self.bank_code_5_digits = BANKS[clabe[:3]]
-        self.bank_name = BANK_NAMES[self.bank_code_5_digits]
+        self.bank_code_abm = clabe[:3]
+        self.bank_code_banxico = BANKS[clabe[:3]]
+        self.bank_name = BANK_NAMES[self.bank_code_banxico]
 
     @classmethod
     def __get_validators__(cls) -> 'CallableGenerator':
@@ -40,12 +40,12 @@ class Clabe(str):
         yield constr_strip_whitespace
         yield constr_length_validator
         yield validate_digits
-        yield cls.validate_bank_code
+        yield cls.validate_bank_code_abm
         yield cls.validate_control_digit
         yield cls
 
     @classmethod
-    def validate_bank_code(cls, clabe: str) -> str:
+    def validate_bank_code_abm(cls, clabe: str) -> str:
         if clabe[:3] not in BANKS.keys():
             raise exc.BankCodeValidationError
         return clabe
