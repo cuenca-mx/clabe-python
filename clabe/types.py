@@ -7,7 +7,7 @@ from pydantic.validators import (
     str_validator,
 )
 
-from . import exc
+from .errors import BankCodeValidationError, ClabeControlDigitValidationError
 from .validations import BANK_NAMES, BANKS, compute_control_digit
 
 if TYPE_CHECKING:
@@ -47,13 +47,13 @@ class Clabe(str):
     @classmethod
     def validate_bank_code_abm(cls, clabe: str) -> str:
         if clabe[:3] not in BANKS.keys():
-            raise exc.BankCodeValidationError
+            raise BankCodeValidationError
         return clabe
 
     @classmethod
     def validate_control_digit(cls, clabe: str) -> str:
         if clabe[-1] != compute_control_digit(clabe):
-            raise exc.ClabeControlDigitValidationError
+            raise ClabeControlDigitValidationError
         return clabe
 
     @property
