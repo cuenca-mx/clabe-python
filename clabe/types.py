@@ -55,3 +55,7 @@ class Clabe(str):
         if clabe[-1] != compute_control_digit(clabe):
             raise exc.ClabeControlDigitValidationError
         return clabe
+
+    @property
+    def bank_code(self):
+        return self.bank_code_banxico

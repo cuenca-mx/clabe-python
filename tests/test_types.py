@@ -18,6 +18,7 @@ def test_valid_clabe():
     assert cuenta.clabe.bank_code_abm == '646'
     assert cuenta.clabe.bank_code_banxico == BANKS['646']
     assert cuenta.clabe.bank_name == BANK_NAMES[BANKS['646']]
+    assert cuenta.clabe.bank_code == cuenta.clabe.bank_code_banxico
 
 
 def test_clabe_digits():
