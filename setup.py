@@ -6,13 +6,12 @@ version = SourceFileLoader('version', 'clabe/version.py').load_module()
 
 
 test_requires = [
-    'pytest',
-    'coverage<5',
-    'pytest-cov',
-    'black',
-    'isort[pipfile]',
-    'flake8',
-    'mypy',
+    'pytest==5.4.3',
+    'pytest-cov==2.10.0',
+    'black==19.10b0',
+    'isort==5.0.4',
+    'flake8==3.8.3',
+    'mypy==0.782',
 ]
 
 with open('README.md', 'r') as f:
