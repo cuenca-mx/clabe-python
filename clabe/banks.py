@@ -124,7 +124,7 @@ BANK_NAMES = {
     '40060': 'Bansi',
     '2001': 'Banxico',
     '40129': 'Barclays',
-    '40145': 'Bbase',
+    '40145': 'Banco BASE',
     '40012': 'BBVA Bancomer',
     '40112': 'Bmonex',
     '90677': 'Caja Pop Mexica',
