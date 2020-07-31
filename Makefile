@@ -13,7 +13,7 @@ venv:
 	pip install -qU pip
 
 install:
-    pip install -qU -r requirements.txt
+	pip install -qU -r requirements.txt
 
 install-test:
 	pip install -qU -r requirements-test.txt
