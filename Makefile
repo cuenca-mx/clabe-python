@@ -15,7 +15,7 @@ venv:
 install:
 	pip install -qU -r requirements.txt
 
-install-test:
+install-test: install
 	pip install -qU -r requirements-test.txt
 
 test: clean install-test lint
