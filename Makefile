@@ -12,11 +12,14 @@ venv:
 	$(PYTHON) -m venv --prompt $(PROJECT) venv
 	pip install -qU pip
 
-install-test:
-	pip install -q .[test]
+install:
+	pip install -qU -r requirements.txt
+
+install-test: install
+	pip install -qU -r requirements-test.txt
 
 test: clean install-test lint
-	python setup.py test
+	pytest
 
 format:
 	$(isort)
@@ -43,7 +46,7 @@ clean:
 	rm -rf build
 	rm -rf dist
 
-release: clean
+release: test clean
 	python setup.py sdist bdist_wheel
 	twine upload dist/*
 
