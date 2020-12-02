@@ -3,8 +3,9 @@ updates:
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
-    interval: daily
-    time: "08:00"
+    interval: weekly
+    day: wednesday
+    time: "11:00"
     timezone: "America/Mexico_City"
   open-pull-requests-limit: 5
   reviewers:
@@ -13,8 +14,9 @@ updates:
 - package-ecosystem: pip
   directory: "/"
   schedule:
-    interval: daily
-    time: "08:00"
+    interval: weekly
+    day: wednesday
+    time: "11:00"
     timezone: "America/Mexico_City"
   open-pull-requests-limit: 5
   reviewers:
