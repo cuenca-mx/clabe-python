@@ -1,5 +1,5 @@
 pytest==6.2.*
-pytest-cov==2.10.*
+pytest-cov==2.11.*
 black==20.8b1
 isort==5.7.*
 flake8==3.8.*
