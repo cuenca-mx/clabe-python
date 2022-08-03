@@ -51,9 +51,9 @@ def get_bank_name(clabe: str) -> str:
 def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
     clabes = []
     missing = CLABE_LENGTH - len(prefix) - 1
-    assert (10 ** missing - 10 ** (missing - 1)) >= number_of_clabes
+    assert (10**missing - 10 ** (missing - 1)) >= number_of_clabes
     clabe_sections = random.sample(
-        range(10 ** (missing - 1), 10 ** missing), number_of_clabes
+        range(10 ** (missing - 1), 10**missing), number_of_clabes
     )
     for clabe_section in clabe_sections:
         clabe = prefix + str(clabe_section)
