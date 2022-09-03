@@ -1,0 +1,40 @@
+name: Upload licenses to S3
+
+on: ["push"]
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    env:
+      FILE: ./licence_compliance.csv
+      AWS_REGION: 'us-east-1'
+      S3_BUCKET: 'project-license-dependency'
+      S3_KEY: ${{ github.event.repository.name }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.S3_UPLOAD_APIKEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_UPLOAD_API_SECRET }}
+      PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+      PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - name: Setup Python
+        uses: actions/setup-python@v2.3.1
+        with:
+          python-version: 3.8
+      - name: Install and run pip-licenses
+        run: |
+          pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.io:8081
+          make install-test
+          pip install pip-licenses
+          pip-licenses --format=csv --output-file licence_compliance.csv
+      - name: Upload S3
+        # https://github.com/zdurham/s3-upload-github-action
+        run: |
+          pip install --quiet --no-cache-dir awscli
+          mkdir -p ~/.aws
+          touch ~/.aws/credentials
+          echo "[default]
+          aws_access_key_id = ${AWS_ACCESS_KEY_ID}
+          aws_secret_access_key = ${AWS_SECRET_ACCESS_KEY}" > ~/.aws/credentials
+          aws s3 cp ${FILE} s3://${S3_BUCKET}/${S3_KEY} --region ${AWS_REGION} $*
+          rm -rf ~/.aws
+        
