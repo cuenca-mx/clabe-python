@@ -159,7 +159,7 @@ BANK_NAMES = {
     '40132': 'Multiva Banco',
     '90613': 'Multiva Cbolsa',
     '37135': 'Nafin',
-    '90638': 'NU México',
+    '90638': 'NU MEXICO',
     '90710': 'NVIO',
     '90684': 'Opm',
     '40148': 'Pagatodo',
