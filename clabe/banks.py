@@ -96,7 +96,7 @@ BANK_NAMES = {
     '40138': 'ABC Capital',
     '40133': 'Actinver',
     '40062': 'Afirme',
-    '90661': 'ALTERNATIVOS',
+    '90661': 'KLAR',
     '90706': 'Arcus',
     '90659': 'Asp Integra Opc',
     '40128': 'Autofin',
