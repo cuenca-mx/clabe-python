@@ -7,8 +7,11 @@ from pydantic.validators import (
     str_validator,
 )
 
-from .errors import BankCodeValidationError, ClabeControlDigitValidationError
-from .validations import BANK_NAMES, BANKS, compute_control_digit
+from clabe.errors import (
+    BankCodeValidationError,
+    ClabeControlDigitValidationError,
+)
+from clabe.validations import BANK_NAMES, BANKS, compute_control_digit
 
 if TYPE_CHECKING:
     from pydantic.typing import CallableGenerator

@@ -9,8 +9,9 @@ __all__ = [
     'validate_clabe',
 ]
 
+from clabe.types.clabes_pydantic_legacy import Clabe
+
 from .banks import BANK_NAMES, BANKS
-from .types import Clabe
 from .validations import (
     compute_control_digit,
     generate_new_clabes,
