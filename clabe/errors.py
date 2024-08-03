@@ -1,4 +1,11 @@
-from pydantic.errors import PydanticValueError
+from .helpers import is_pydantic_v1_installed
+
+if is_pydantic_v1_installed():
+    from pydantic.errors import PydanticValueError
+else:
+    from pydantic_core import PydanticCustomError
+    class PydanticValueError(PydanticCustomError):
+        ...
 
 
 class BankCodeValidationError(PydanticValueError):
