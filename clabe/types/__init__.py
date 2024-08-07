@@ -1,6 +1,6 @@
-from ..helpers import is_pydantic_v1_installed
+import pydantic
 
-if is_pydantic_v1_installed():
-    from .clabes_pydantic_v1 import Clabe, validate_digits
+if pydantic.VERSION.startswith('1.'):
+    from .clabes_legacy.clabes import Clabe, validate_digits
 else:
     from .clabes import Clabe, validate_digits

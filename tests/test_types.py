@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from pydantic.errors import NotDigitError
 
 from clabe import BANK_NAMES, BANKS, compute_control_digit
-from clabe.errors import (
+from clabe.types.clabes_legacy.errors import (
     BankCodeValidationError,
     ClabeControlDigitValidationError,
 )

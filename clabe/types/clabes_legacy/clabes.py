@@ -7,7 +7,7 @@ from pydantic.validators import (
     str_validator,
 )
 
-from clabe.errors import (
+from clabe.types.clabes_legacy.errors import (
     BankCodeValidationError,
     ClabeControlDigitValidationError,
 )
