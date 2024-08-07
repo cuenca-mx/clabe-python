@@ -13,24 +13,13 @@ venv:
 	pip install -qU pip
 
 venv2:
-	pdm venv create --with-pip --name pydanticv1
-	pdm venv create --with-pip --name pydanticv2
+	pdm venv create --with-pip --name pydantic_v1
 
 install:
-	pip install -qU -r requirements.txt
+	pdm install
+	pdm install --venv pydantic_v1 --lockfile pdm-legacy.lock --override requirements-legacy.txt
 
-install_all:
-	eval $(pdm venv activate pydanticv1)
-	pip install -qU -r requirements-legacy.txt
-	deactivate
-	eval $(pdm venv activate pydanticv2)
-	pip install -qU -r requirements.txt
-	deactivate
-
-install-test: install
-	pip install -qU -r requirements-test.txt
-
-test: clean install-test lint
+test: clean lint
 	pytest
 
 format:
@@ -63,4 +52,4 @@ release: test clean
 	twine upload dist/*
 
 
-.PHONY: all install-test test format lint clean release
+.PHONY: all test format lint clean release
