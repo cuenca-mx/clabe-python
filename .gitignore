@@ -117,3 +117,7 @@ venv.bak/
 
 # others
 .DS_Store
+
+# pdm
+.pdm-python
+.pdm-build/

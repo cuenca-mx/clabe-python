@@ -12,8 +12,20 @@ venv:
 	$(PYTHON) -m venv --prompt $(PROJECT) venv
 	pip install -qU pip
 
+venv2:
+	pdm venv create --with-pip --name pydanticv1
+	pdm venv create --with-pip --name pydanticv2
+
 install:
 	pip install -qU -r requirements.txt
+
+install_all:
+	eval $(pdm venv activate pydanticv1)
+	pip install -qU -r requirements-legacy.txt
+	deactivate
+	eval $(pdm venv activate pydanticv2)
+	pip install -qU -r requirements.txt
+	deactivate
 
 install-test: install
 	pip install -qU -r requirements-test.txt

@@ -1,0 +1,37 @@
+[project]
+name = "clabe-python"
+dynamic = ["version"]
+description = "Validate and generate the control digit of a CLABE in Mexico"
+authors = [
+    {name = "Cuenca", email = "dev@cuenca.com"},
+]
+dependencies = [
+    "pydantic==1.10"
+]
+requires-python = ">=3.8.1"
+readme = "README.md"
+license = {text = "MIT"}
+
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=8.3.2",
+    "pytest-cov>=5.0.0",
+    "black>=24.8.0",
+    "isort>=5.13.2",
+    "flake8>=7.1.0",
+    "mypy>=1.11.1",
+]
