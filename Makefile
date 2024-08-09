@@ -2,8 +2,8 @@ SHELL := bash
 PATH := ./venv/bin:${PATH}
 PYTHON = python3.7
 PROJECT = clabe
-isort = isort $(PROJECT) tests setup.py
-black = black -S -l 79 --target-version py38 $(PROJECT) tests setup.py
+isort = isort $(PROJECT) tests
+black = black -S -l 79 --target-version py38 $(PROJECT) tests
 
 
 all: test
@@ -23,14 +23,14 @@ test: clean lint
 	pytest
 
 format:
-	$(isort)
-	$(black)
+	pdm run $(isort)
+	pdm run $(black)
 
 lint:
-	flake8 $(PROJECT) tests setup.py
-	$(isort) --check-only
-	$(black) --check
-	mypy $(PROJECT) tests
+	pdm run flake8 $(PROJECT) tests
+	pdm $(isort) --check-only
+	pdm $(black) --check
+	pdm mypy $(PROJECT) tests
 
 clean:
 	rm -rf `find . -name __pycache__`

@@ -1,11 +1,9 @@
 import pytest
-
-from clabe.utils import is_pydantic_v1
-
 from pydantic import BaseModel, ValidationError
 
 from clabe import BANK_NAMES, BANKS
 from clabe.types import Clabe
+from clabe.utils import is_pydantic_v1
 
 VALID_CLABE = '646180157042875763'
 
