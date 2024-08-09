@@ -29,7 +29,7 @@ class Clabe(str):
     min_length: ClassVar[int] = 18
     max_length: ClassVar[int] = 18
 
-    def __init__(self, clabe: str):
+    def __init__(self, clabe: str) -> None:
         self.bank_code_abm = clabe[:3]
         self.bank_code_banxico = BANKS[clabe[:3]]
         self.bank_name = BANK_NAMES[self.bank_code_banxico]
@@ -57,5 +57,5 @@ class Clabe(str):
         return clabe
 
     @property
-    def bank_code(self):
+    def bank_code(self) -> str:
         return self.bank_code_banxico

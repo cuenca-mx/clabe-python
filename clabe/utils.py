@@ -1,5 +1,5 @@
 import pydantic
 
 
-def pydantic_v1():
+def is_pydantic_v1():
     return pydantic.VERSION.startswith('1.')

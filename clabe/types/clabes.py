@@ -11,13 +11,13 @@ class Clabe(str):
     min_length: ClassVar[int] = 18
     max_length: ClassVar[int] = 18
 
-    def __init__(self, clabe: str):
+    def __init__(self, clabe: str) -> None:
         self.bank_code_abm = clabe[:3]
         self.bank_code_banxico = BANKS[clabe[:3]]
         self.bank_name = BANK_NAMES[self.bank_code_banxico]
 
     @property
-    def bank_code(self):
+    def bank_code(self) -> str:
         return self.bank_code_banxico
 
     @classmethod
@@ -42,17 +42,15 @@ class Clabe(str):
         )
 
     @classmethod
-    def _validate(cls, clabe: str, _: core_schema.ValidationInfo) -> str:
+    def _validate(cls, clabe: str, _: core_schema.ValidationInfo) -> 'Clabe':
         if not clabe.isdigit():
-            raise PydanticCustomError(
-                'value_error', 'código de banco no es válido'
-            )
+            raise PydanticCustomError('clabe', 'debe ser numérico')
         if clabe[:3] not in BANKS.keys():
             raise PydanticCustomError(
-                'value_error', 'código de banco no es válido'
+                'clabe.bank_code', 'código de banco no es válido'
             )
         if clabe[-1] != compute_control_digit(clabe):
             raise PydanticCustomError(
-                'value_error', 'clabe dígito de control no es válido'
+                'clabe.control_digit', 'clabe dígito de control no es válido'
             )
-        return clabe
+        return cls(clabe)
