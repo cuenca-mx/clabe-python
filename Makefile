@@ -4,23 +4,29 @@ PYTHON = python3.7
 PROJECT = clabe
 isort = isort $(PROJECT) tests
 black = black -S -l 79 --target-version py38 $(PROJECT) tests
+PYDANTIC_V1_VENV := pydantic_v1
 
 
 all: test
 
 venv:
-	$(PYTHON) -m venv --prompt $(PROJECT) venv
-	pip install -qU pip
+	@if pdm venv list | grep -q $(PYDANTIC_V1_VENV); then \
+		echo "Virtual environment $(PYDANTIC_V1_VENV) already exists. Skipping creation."; \
+	else \
+		echo "Creating virtual environment $(PYDANTIC_V1_VENV)."; \
+		pdm venv create --with-pip --name $(PYDANTIC_V1_VENV); \
+	fi
 
-venv2:
-	pdm venv create --with-pip --name pydantic_v1
+install: venv
+	pdm install -q
+	pdm install -q \
+		--venv $(PYDANTIC_V1_VENV) \
+		--lockfile pdm-legacy.lock \
+		--override requirements-legacy.txt
 
-install:
-	pdm install
-	pdm install --venv pydantic_v1 --lockfile pdm-legacy.lock --override requirements-legacy.txt
-
-test: clean lint
-	pytest
+test: venv clean
+	pdm run pytest
+	pdm run --venv $(PYDANTIC_V1_VENV) pytest
 
 format:
 	pdm run $(isort)
@@ -28,9 +34,9 @@ format:
 
 lint:
 	pdm run flake8 $(PROJECT) tests
-	pdm $(isort) --check-only
-	pdm $(black) --check
-	pdm mypy $(PROJECT) tests
+	pdm run $(isort) --check-only
+	pdm run $(black) --check
+	pdm run mypy $(PROJECT) tests
 
 clean:
 	rm -rf `find . -name __pycache__`
