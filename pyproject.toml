@@ -23,11 +23,25 @@ requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
 [tool.pytest.ini_options]
-addopts = ["--ignore=__pypackages__", "--ignore-glob=*.yaml", "-v", "--cov-report=term-missing", "--cov=clabe"]
+addopts = [
+    "--ignore=__pypackages__",
+    "--ignore-glob=*.yaml",
+    "-v",
+    "--cov-report=term-missing",
+    "--cov=clabe"
+]
+
+[tool.isort]
+profile="black"
+line_length=79
 
 [tool.mypy]
 ignore_missing_imports = true
 plugins = "pydantic.mypy"
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = ["if TYPE_CHECKING"]
 
 [tool.pdm]
 distribution = true
