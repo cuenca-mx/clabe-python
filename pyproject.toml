@@ -1,5 +1,5 @@
 [project]
-name = "clabe-python"
+name = "clabe"
 dynamic = ["version"]
 description = "Validate and generate the control digit of a CLABE in Mexico"
 authors = [
@@ -22,6 +22,12 @@ classifiers = [
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
+[tool.pytest.ini_options]
+addopts = ["--ignore=__pypackages__", "--ignore-glob=*.yaml", "-v", "--cov-report=term-missing", "--cov=clabe"]
+
+[tool.mypy]
+ignore_missing_imports = true
+plugins = "pydantic.mypy"
 
 [tool.pdm]
 distribution = true

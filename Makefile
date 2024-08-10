@@ -19,14 +19,16 @@ venv:
 
 install: venv
 	pdm install -q
-	pdm install -q \
-		--venv $(PYDANTIC_V1_VENV) \
-		--lockfile pdm-legacy.lock \
-		--override requirements-legacy.txt
+	pdm install -q --venv $(PYDANTIC_V1_VENV) --lockfile pdm-legacy.lock --override requirements-legacy.txt
 
 test: venv clean
 	pdm run pytest
+	mv .coverage .cov.pydantic_v2
 	pdm run --venv $(PYDANTIC_V1_VENV) pytest
+	mv .coverage .cov.pydantic_v1
+	pdm run coverage combine .cov.pydantic_v1 .cov.pydantic_v2
+	pdm run coverage report -m
+	pdm run coverage xml -o coverage.xml
 
 format:
 	pdm run $(isort)
