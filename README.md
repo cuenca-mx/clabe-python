@@ -6,11 +6,16 @@
 [![Downloads](https://pepy.tech/badge/clabe)](https://pepy.tech/project/clabe)
 
 Librería para validar y calcular un número CLABE basado en
-https://es.wikipedia.org/wiki/CLABE
+https://es.wikipedia.org/wiki/CLABE. 
+
+Además, incluye la clase `Clabe`, un tipo personalizado diseñado
+para integrarse con Pydantic, proporcionando un validador
+robusto y eficiente para números CLABE dentro de tus
+modelos Pydantic. Compatible con Pydantic V1.10.x y V2.x.x
 
 ## Requerimientos
 
-Python 3.6 o superior.
+Python 3.8 o superior.
 
 ## Instalación
 
@@ -22,9 +27,30 @@ pip install clabe
 
 ## Pruebas
 
-Para ejecutar las pruebas
+### Requisitos previos
 
+#### Instalar PDM
+
+Usamos PDM como administrador de paquetes y entornos virtuales (virtualenv). 
+Esto nos permite ejecutar pruebas unitarias con Pydantic 
+tanto en las versiones 1.x.x como 2.x.x. Sigue la [guía oficial](https://pdm-project.org/en/latest/#recommended-installation-method) 
+de instalación para instalarlo.
+
+#### Instalar dependencias
+
+El siguiente comando creará dos virtualenv. Uno donde se instala
+pydantic V1.x.x y otro donde se instala Pydantic V2. Todo esto
+es gestionado por PDM.
+```bash
+make install
 ```
+
+### Ejecutar las pruebas
+
+El siguiente comando ejecutará el conjunto de pruebas de ambos
+virtualenv y generará un único reporte de pruebas y cobertura.
+
+```bash
 $ make test
 ```
 
@@ -56,4 +82,34 @@ Para generar nuevo válido CLABES
 ```python
 import clabe
 clabe.generate_new_clabes(10, '002123456')
+```
+
+### Como tipo personalizado en un modelo de Pydantic
+
+```python
+from pydantic import BaseModel, ValidationError
+
+from clabe import Clabe
+
+
+class Account(BaseModel):
+    id: str
+    clabe: Clabe
+
+
+account = Account(id='123', clabe='723010123456789019')
+print(account)
+"""
+id='123' clabe='723010123456789019'
+"""
+
+try:
+    account = Account(id='321', clabe='000000000000000011')
+except ValidationError as exc:
+    print(exc)
+"""
+1 validation error for Account
+clabe
+  código de banco no es válido [type=clabe.bank_code, input_value='000000000000000011', input_type=str]
+"""
 ```

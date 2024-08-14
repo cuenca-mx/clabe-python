@@ -72,3 +72,19 @@ def test_invalid_clabe(clabe: str, expected_message: str) -> None:
         Cuenta(clabe=clabe)
 
     assert expected_message in str(exc.value)
+
+
+@pytest.mark.skipif(is_pydantic_v1(), reason='only pydantic v2')
+def test_get_json_schema() -> None:
+    from pydantic import TypeAdapter
+
+    adapter = TypeAdapter(Clabe)
+    schema = adapter.json_schema()
+    assert schema == {
+        'description': 'CLABE (Clave Bancaria Estandarizada)',
+        'examples': ['723010123456789019'],
+        'maxLength': 18,
+        'minLength': 18,
+        'pattern': '^[0-9]{18}$',
+        'type': 'string',
+    }

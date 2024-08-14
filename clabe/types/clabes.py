@@ -25,14 +25,19 @@ class Clabe(str):
         cls, schema: core_schema.CoreSchema, handler: GetJsonSchemaHandler
     ) -> dict[str, Any]:
         json_schema = handler(schema)
-        json_schema.update({'format': 'phone'})
+        json_schema.update(
+            type="string",
+            pattern="^[0-9]{18}$",
+            description="CLABE (Clave Bancaria Estandarizada)",
+            examples=["723010123456789019"],
+        )
         return json_schema
 
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, source: type[Any], handler: GetCoreSchemaHandler
+        cls, _: type[Any], __: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
-        return core_schema.with_info_after_validator_function(
+        return core_schema.no_info_after_validator_function(
             cls._validate,
             core_schema.str_schema(
                 min_length=cls.min_length,
@@ -42,7 +47,7 @@ class Clabe(str):
         )
 
     @classmethod
-    def _validate(cls, clabe: str, _: core_schema.ValidationInfo) -> 'Clabe':
+    def _validate(cls, clabe: str) -> 'Clabe':
         if not clabe.isdigit():
             raise PydanticCustomError('clabe', 'debe ser numérico')
         if clabe[:3] not in BANKS.keys():
