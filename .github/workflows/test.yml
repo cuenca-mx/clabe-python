@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]
+        python-version: ['3.8', '3.9', '3.10']
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -45,7 +45,9 @@ jobs:
         with:
           python-version: 3.8
       - name: Install dependencies
-        run: make install
+        run: |
+          pip install -q pdm
+          make install
       - name: Generate coverage report
         run: make test
       - name: Upload coverage to Codecov
