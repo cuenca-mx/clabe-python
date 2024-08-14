@@ -12,7 +12,9 @@ jobs:
         with:
           python-version: 3.8
       - name: Install dependencies
-        run: make install-test
+        run: |
+          pip install -q pdm
+          make install
       - name: Lint
         run: make lint
 
@@ -20,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8]
+        python-version: [3.8, 3.9, 3.10]
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -28,9 +30,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
-      run: make install-test
+      run: |
+        pip install -q pdm
+        make install
     - name: Run tests
-      run: pytest
+      run: make test
 
   coverage:
     runs-on: ubuntu-latest
@@ -41,9 +45,9 @@ jobs:
         with:
           python-version: 3.8
       - name: Install dependencies
-        run: make install-test
+        run: make install
       - name: Generate coverage report
-        run: pytest --cov-report=xml
+        run: make test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2.1.0
         with:
