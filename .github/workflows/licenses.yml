@@ -24,6 +24,7 @@ jobs:
         run: |
           pip install -q pdm
           pdm run pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.io:8081
+          rm -f .pdm-python
           make install
           pdm run pip install pip-licenses
           pdm run pip-licenses --format=csv --output-file licence_compliance.csv
