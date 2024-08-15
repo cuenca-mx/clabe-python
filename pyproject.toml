@@ -6,8 +6,7 @@ authors = [
     {name = "Cuenca", email = "dev@cuenca.com"},
 ]
 dependencies = [
-    "pydantic>=1.10",
-    "pip-licenses>=4.5.1",
+    "pydantic>=1.10"
 ]
 requires-python = ">=3.8.1"
 readme = "README.md"
