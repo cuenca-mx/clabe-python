@@ -32,6 +32,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
+        ls -la
         pip install -q pdm
         rm -f .pdm-python
         make install
