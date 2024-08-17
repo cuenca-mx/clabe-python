@@ -1,4 +1,4 @@
-from typing import Any, ClassVar
+from typing import Any, ClassVar, Dict
 
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
 from pydantic_core import PydanticCustomError, core_schema
@@ -23,7 +23,7 @@ class Clabe(str):
     @classmethod
     def __get_pydantic_json_schema__(
         cls, schema: core_schema.CoreSchema, handler: GetJsonSchemaHandler
-    ) -> dict[str, Any]:
+    ) -> Dict[str, Any]:
         json_schema = handler(schema)
         json_schema.update(
             type="string",
