@@ -1,4 +1,4 @@
-from typing import Any, ClassVar, Dict
+from typing import Any, ClassVar, Dict, Type
 
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
 from pydantic_core import PydanticCustomError, core_schema
@@ -35,7 +35,7 @@ class Clabe(str):
 
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, _: type[Any], __: GetCoreSchemaHandler
+        cls, _: Type[Any], __: GetCoreSchemaHandler
     ) -> core_schema.CoreSchema:
         return core_schema.no_info_after_validator_function(
             cls._validate,
