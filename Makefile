@@ -18,8 +18,8 @@ venv:
 	fi
 
 install: venv
-	pdm install -v
-	pdm install -v --venv $(PYDANTIC_V1_VENV) --lockfile pdm-legacy.lock --override requirements-legacy.txt
+	pdm install -q
+	pdm install -q --venv $(PYDANTIC_V1_VENV) --lockfile pdm-legacy.lock --override requirements-legacy.txt
 
 test: venv clean
 	pdm run pytest
