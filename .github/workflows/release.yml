@@ -1,6 +1,8 @@
 name: release
 
-on: push
+on:
+  release:
+    types: [published]
 
 jobs:
   publish-pypi:
@@ -8,15 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python 3.8
-        uses: actions/setup-python@v5
+        uses: pdm-project/setup-pdm@v4
         with:
           python-version: 3.8
-      - name: Install dependencies
-        run: pip install -qU setuptools wheel twine
       - name: Generating distribution archives
-        run: python setup.py sdist bdist_wheel
+        run: pdm build
       - name: Publish distribution 📦 to PyPI
-        if: startsWith(github.event.ref, 'refs/tags')
         uses: pypa/gh-action-pypi-publish@master
         with:
           user: __token__

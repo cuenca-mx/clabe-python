@@ -17,12 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: pdm-project/setup-pdm@v4
         with:
           python-version: 3.8
       - name: Install and run pip-licenses
         run: |
-          pip install -q pdm
           pdm run pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.io:8081
           rm -f .pdm-python
           make install

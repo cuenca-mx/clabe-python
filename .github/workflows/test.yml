@@ -8,12 +8,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: pdm-project/setup-pdm@v4
         with:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          pip install -q pdm
           pdm use -f python3.8
           make install
       - name: Lint
@@ -27,13 +26,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: pdm-project/setup-pdm@v4
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        ls -la
-        pip install -q pdm
         pdm use -f python${{ matrix.python-version }}
         make install
     - name: Run tests
@@ -44,12 +41,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: pdm-project/setup-pdm@v4
         with:
           python-version: 3.8
       - name: Install dependencies
         run: |
-          pip install -q pdm
           pdm use -f python3.8
           make install
       - name: Generate coverage report
@@ -57,8 +53,8 @@ jobs:
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.xml
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: true
-

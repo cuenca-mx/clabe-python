@@ -46,6 +46,10 @@ exclude_lines = ["if TYPE_CHECKING"]
 [tool.pdm]
 distribution = true
 
+[tool.pdm.version]
+source = "file"
+path = "clabe/version.py"
+
 [tool.pdm.dev-dependencies]
 dev = [
     "pytest>=8.3.2",
