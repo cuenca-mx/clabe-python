@@ -15,17 +15,18 @@ jobs:
       PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
       PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v2.3.1
+        uses: pdm-project/setup-pdm@v4
         with:
           python-version: 3.8
       - name: Install and run pip-licenses
         run: |
-          pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.io:8081
-          make install-test
-          pip install pip-licenses
-          pip-licenses --format=csv --output-file licence_compliance.csv
+          pdm run pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.io:8081
+          rm -f .pdm-python
+          make install
+          pdm run pip install pip-licenses
+          pdm run pip-licenses --format=csv --output-file licence_compliance.csv
       - name: Upload S3
         # https://github.com/zdurham/s3-upload-github-action
         run: |
