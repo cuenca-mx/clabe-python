@@ -6,7 +6,7 @@
 [![Downloads](https://pepy.tech/badge/clabe)](https://pepy.tech/project/clabe)
 
 Librería para validar y calcular un número CLABE basado en
-https://es.wikipedia.org/wiki/CLABE. 
+[CLABE](https://es.wikipedia.org/wiki/CLABE).
 
 Además, incluye la clase `Clabe`, un tipo personalizado diseñado
 para integrarse con Pydantic, proporcionando un validador
@@ -31,7 +31,7 @@ pip install clabe
 
 #### Instalar PDM
 
-Usamos PDM como administrador de paquetes y entornos virtuales (virtualenv). 
+Usamos PDM como administrador de paquetes y entornos virtuales (virtualenv).
 Esto nos permite ejecutar pruebas unitarias con Pydantic 
 tanto en las versiones 1.x.x como 2.x.x. Sigue la [guía oficial](https://pdm-project.org/en/latest/#recommended-installation-method) 
 de instalación para instalarlo.
@@ -41,6 +41,7 @@ de instalación para instalarlo.
 El siguiente comando creará dos virtualenv. Uno donde se instala
 pydantic V1.x.x y otro donde se instala Pydantic V2. Todo esto
 es gestionado por PDM.
+
 ```bash
 make install
 ```

@@ -27,7 +27,8 @@ def test_valid_clabe():
             'h' * 18,
             'card number is not all digits',
             marks=pytest.mark.skipif(
-                not is_pydantic_v1(), reason='only pydantic v1'
+                not is_pydantic_v1(),
+                reason='only pydantic v1',
             ),
             id='non_numeric_pydantic_v1',
         ),
@@ -35,7 +36,8 @@ def test_valid_clabe():
             'h' * 18,
             'debe ser numérico',
             marks=pytest.mark.skipif(
-                is_pydantic_v1(), reason='only pydantic v2'
+                is_pydantic_v1(),
+                reason='only pydantic v2',
             ),
             id='non_numeric_pydantic_v2',
         ),
@@ -43,7 +45,8 @@ def test_valid_clabe():
             '9' * 17,
             'ensure this value has at least 18 characters',
             marks=pytest.mark.skipif(
-                not is_pydantic_v1(), reason='only pydantic v1'
+                not is_pydantic_v1(),
+                reason='only pydantic v1',
             ),
             id='invalid_length_pydantic_v1',
         ),
@@ -74,7 +77,10 @@ def test_invalid_clabe(clabe: str, expected_message: str) -> None:
     assert expected_message in str(exc.value)
 
 
-@pytest.mark.skipif(is_pydantic_v1(), reason='only pydantic v2')
+@pytest.mark.skipif(
+    is_pydantic_v1(),
+    reason='only pydantic v2',
+)
 def test_get_json_schema() -> None:
     from pydantic import TypeAdapter
 

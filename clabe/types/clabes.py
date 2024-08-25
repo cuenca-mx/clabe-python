@@ -22,7 +22,9 @@ class Clabe(str):
 
     @classmethod
     def __get_pydantic_json_schema__(
-        cls, schema: core_schema.CoreSchema, handler: GetJsonSchemaHandler
+        cls,
+        schema: core_schema.CoreSchema,
+        handler: GetJsonSchemaHandler,
     ) -> Dict[str, Any]:
         json_schema = handler(schema)
         json_schema.update(
@@ -35,7 +37,9 @@ class Clabe(str):
 
     @classmethod
     def __get_pydantic_core_schema__(
-        cls, _: Type[Any], __: GetCoreSchemaHandler
+        cls,
+        _: Type[Any],
+        __: GetCoreSchemaHandler,
     ) -> core_schema.CoreSchema:
         return core_schema.no_info_after_validator_function(
             cls._validate,
@@ -50,7 +54,7 @@ class Clabe(str):
     def _validate(cls, clabe: str) -> 'Clabe':
         if not clabe.isdigit():
             raise PydanticCustomError('clabe', 'debe ser numérico')
-        if clabe[:3] not in BANKS.keys():
+        if clabe[:3] not in BANKS:
             raise PydanticCustomError(
                 'clabe.bank_code', 'código de banco no es válido'
             )
