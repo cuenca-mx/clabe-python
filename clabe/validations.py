@@ -2,6 +2,7 @@ import random
 from typing import List, Union
 
 from .banks import BANK_NAMES, BANKS
+from .errors import BankCodeAlreadyExistsError, BankNameAlreadyExistsError
 
 CLABE_LENGTH = 18
 CLABE_WEIGHTS = [3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7]
@@ -61,3 +62,30 @@ def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
         assert validate_clabe(clabe)
         clabes.append(clabe)
     return clabes
+
+
+def configure_additional_bank(
+    bank_code_abm: str, bank_code_banxico: str, bank_name: str
+) -> None:
+    """
+    Configures an additional bank.
+
+    Args:
+        bank_code_abm (str): The ABM code for the bank.
+        bank_code_banxico (str): The Banxico code for the bank.
+        bank_name (str): The name of the bank.
+
+    Raises:
+        ValueError: If the bank_code_abm or bank_code_banxico
+        already exists in the provided dictionaries.
+    """
+
+    if bank_code_abm in BANKS:
+        raise BankCodeAlreadyExistsError
+
+    if bank_code_banxico in BANK_NAMES:
+        raise BankNameAlreadyExistsError
+
+    BANKS.update({bank_code_abm: bank_code_banxico})
+
+    BANK_NAMES.update({bank_code_banxico: bank_name})
