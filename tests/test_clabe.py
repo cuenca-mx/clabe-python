@@ -2,9 +2,14 @@ import pytest
 
 from clabe import (
     compute_control_digit,
+    configure_additional_bank,
     generate_new_clabes,
     get_bank_name,
     validate_clabe,
+)
+from clabe.errors import (
+    BankCodeABMAlreadyExistsError,
+    BankCodeBanxicoAlreadyExistsError,
 )
 
 VALID_CLABE = '002000000000000008'
@@ -36,3 +41,18 @@ def test_generate_new_clabes():
     for clabe in clabes:
         assert clabe.startswith(prefix)
         assert validate_clabe(clabe)
+
+
+def test_configure_additional_bank_success():
+    configure_additional_bank("777", "713", "New Bank")
+    assert get_bank_name('777') == 'New Bank'
+
+
+def test_configure_additional_bank_existing_abm_code():
+    with pytest.raises(BankCodeABMAlreadyExistsError):
+        configure_additional_bank("002", "40002", "Banamex")
+
+
+def test_configure_additional_bank_existing_banxico_code():
+    with pytest.raises(BankCodeBanxicoAlreadyExistsError):
+        configure_additional_bank("666", "40137", "New Bank")
