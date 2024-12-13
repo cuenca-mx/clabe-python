@@ -2,7 +2,10 @@ import random
 from typing import List, Union
 
 from .banks import BANK_NAMES, BANKS
-from .errors import BankCodeAlreadyExistsError, BankNameAlreadyExistsError
+from .errors import (
+    BankCodeABMAlreadyExistsError,
+    BankCodeBanxicoAlreadyExistsError,
+)
 
 CLABE_LENGTH = 18
 CLABE_WEIGHTS = [3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7]
@@ -81,10 +84,10 @@ def configure_additional_bank(
     """
 
     if bank_code_abm in BANKS:
-        raise BankCodeAlreadyExistsError
+        raise BankCodeABMAlreadyExistsError
 
     if bank_code_banxico in BANK_NAMES:
-        raise BankNameAlreadyExistsError
+        raise BankCodeBanxicoAlreadyExistsError
 
     BANKS.update({bank_code_abm: bank_code_banxico})
 
