@@ -1,6 +1,6 @@
 import pytest
-from pydantic import BaseModel
-from pydantic.errors import NotDigitError
+from pydantic.v1 import BaseModel
+from pydantic.v1.errors import NotDigitError
 
 from clabe import BANK_NAMES, BANKS, compute_control_digit
 from clabe.errors import (

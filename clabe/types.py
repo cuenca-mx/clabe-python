@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, ClassVar
 
-from pydantic.errors import NotDigitError
-from pydantic.validators import (
+from pydantic.v1.errors import NotDigitError
+from pydantic.v1.validators import (
     constr_length_validator,
     constr_strip_whitespace,
     str_validator,
@@ -11,7 +11,7 @@ from .errors import BankCodeValidationError, ClabeControlDigitValidationError
 from .validations import BANK_NAMES, BANKS, compute_control_digit
 
 if TYPE_CHECKING:
-    from pydantic.typing import CallableGenerator
+    from pydantic.v1.typing import CallableGenerator
 
 
 def validate_digits(v: str) -> str:
