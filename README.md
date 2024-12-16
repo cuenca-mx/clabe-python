@@ -57,3 +57,10 @@ Para generar nuevo válido CLABES
 import clabe
 clabe.generate_new_clabes(10, '002123456')
 ```
+
+Para generar un nuevo banco
+
+```python
+import clabe
+clabe.configure_additional_bank('777', '713', 'New Bank')
+```
