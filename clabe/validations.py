@@ -1,13 +1,9 @@
 import random
 from typing import List, Union
 
-from pydantic.errors import NotDigitError
+from pydantic_core import PydanticCustomError
 
 from .banks import BANK_NAMES, BANKS
-from .errors import (
-    BankCodeABMAlreadyExistsError,
-    BankCodeBanxicoAlreadyExistsError,
-)
 
 CLABE_LENGTH = 18
 CLABE_WEIGHTS = [3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7]
@@ -89,22 +85,26 @@ def configure_additional_bank(
         isinstance(x, str)
         for x in [bank_code_abm, bank_code_banxico, bank_name]
     ):
-        raise TypeError("All parameters must be strings")
+        raise TypeError('All parameters must be strings')
 
     if not bank_code_abm.isdigit():
-        raise NotDigitError
+        raise TypeError('debe ser numérico')
 
     if not bank_code_banxico.isdigit():
-        raise NotDigitError
+        raise TypeError('debe ser numérico')
 
     if not bank_name.strip():
-        raise ValueError("bank_name cannot be empty")
+        raise ValueError('bank_name cannot be empty')
 
     if bank_code_abm in BANKS:
-        raise BankCodeABMAlreadyExistsError
+        raise PydanticCustomError(
+            'clabe.bank_code_abm', 'código de banco ABM ya existe'
+        )
 
     if bank_code_banxico in BANK_NAMES:
-        raise BankCodeBanxicoAlreadyExistsError
+        raise PydanticCustomError(
+            'clabe.bank_code_banxico', 'código de banco banxico ya existe'
+        )
 
     BANKS[bank_code_abm] = bank_code_banxico
     BANK_NAMES[bank_code_banxico] = bank_name.strip()

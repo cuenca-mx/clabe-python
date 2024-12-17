@@ -1,4 +1,5 @@
 import pytest
+from pydantic_core import PydanticCustomError
 
 from clabe import (
     compute_control_digit,
@@ -6,10 +7,6 @@ from clabe import (
     generate_new_clabes,
     get_bank_name,
     validate_clabe,
-)
-from clabe.errors import (
-    BankCodeABMAlreadyExistsError,
-    BankCodeBanxicoAlreadyExistsError,
 )
 
 VALID_CLABE = '002000000000000008'
@@ -44,28 +41,32 @@ def test_generate_new_clabes():
 
 
 def test_configure_additional_bank_success():
-    configure_additional_bank("777", "713", "New Bank")
+    configure_additional_bank('777', '713', 'New Bank')
     assert get_bank_name('777') == 'New Bank'
 
 
 def test_configure_additional_bank_existing_abm_code():
-    with pytest.raises(BankCodeABMAlreadyExistsError):
-        configure_additional_bank("002", "40002", "Banamex")
+    with pytest.raises(PydanticCustomError) as exc_info:
+        configure_additional_bank('002', '40002', 'Banamex')
+    assert exc_info.value.type == 'clabe.bank_code_abm'
+    assert 'código de banco ABM ya existe' in str(exc_info.value)
 
 
 def test_configure_additional_bank_existing_banxico_code():
-    with pytest.raises(BankCodeBanxicoAlreadyExistsError):
-        configure_additional_bank("666", "40137", "New Bank")
+    with pytest.raises(PydanticCustomError) as exc_info:
+        configure_additional_bank('666', '40137', 'New Bank')
+    assert exc_info.value.type == 'clabe.bank_code_banxico'
+    assert 'código de banco banxico ya existe' in str(exc_info.value)
 
 
 def test_configure_additional_bank_invalid_inputs():
     with pytest.raises(TypeError):
         configure_additional_bank(3, 3, 3)
+    with pytest.raises(TypeError):
+        configure_additional_bank('A', 'B', 'C')
+    with pytest.raises(TypeError):
+        configure_additional_bank('666', 'B', 'C')
     with pytest.raises(ValueError):
-        configure_additional_bank("A", "B", "C")
-    with pytest.raises(ValueError):
-        configure_additional_bank("666", "B", "C")
-    with pytest.raises(ValueError):
-        configure_additional_bank("777", "713", "")
-    with pytest.raises(ValueError):
-        configure_additional_bank("abc", "def", "Test Bank")
+        configure_additional_bank('777', '713', '')
+    with pytest.raises(TypeError):
+        configure_additional_bank('abc', 'def', 'Test Bank')
