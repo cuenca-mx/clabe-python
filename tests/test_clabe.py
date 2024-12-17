@@ -56,3 +56,16 @@ def test_configure_additional_bank_existing_abm_code():
 def test_configure_additional_bank_existing_banxico_code():
     with pytest.raises(BankCodeBanxicoAlreadyExistsError):
         configure_additional_bank("666", "40137", "New Bank")
+
+
+def test_configure_additional_bank_invalid_inputs():
+    with pytest.raises(TypeError):
+        configure_additional_bank(3, 3, 3)
+    with pytest.raises(ValueError):
+        configure_additional_bank("A", "B", "C")
+    with pytest.raises(ValueError):
+        configure_additional_bank("666", "B", "C")
+    with pytest.raises(ValueError):
+        configure_additional_bank("777", "713", "")
+    with pytest.raises(ValueError):
+        configure_additional_bank("abc", "def", "Test Bank")

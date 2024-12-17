@@ -1,6 +1,8 @@
 import random
 from typing import List, Union
 
+from pydantic.errors import NotDigitError
+
 from .banks import BANK_NAMES, BANKS
 from .errors import (
     BankCodeABMAlreadyExistsError,
@@ -83,12 +85,26 @@ def configure_additional_bank(
         already exists in the provided dictionaries.
     """
 
+    if not all(
+        isinstance(x, str)
+        for x in [bank_code_abm, bank_code_banxico, bank_name]
+    ):
+        raise TypeError("All parameters must be strings")
+
+    if not bank_code_abm.isdigit():
+        raise NotDigitError
+
+    if not bank_code_banxico.isdigit():
+        raise NotDigitError
+
+    if not bank_name.strip():
+        raise ValueError("bank_name cannot be empty")
+
     if bank_code_abm in BANKS:
         raise BankCodeABMAlreadyExistsError
 
     if bank_code_banxico in BANK_NAMES:
         raise BankCodeBanxicoAlreadyExistsError
 
-    BANKS.update({bank_code_abm: bank_code_banxico})
-
-    BANK_NAMES.update({bank_code_banxico: bank_name})
+    BANKS[bank_code_abm] = bank_code_banxico
+    BANK_NAMES[bank_code_banxico] = bank_name.strip()
