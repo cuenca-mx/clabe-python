@@ -49,8 +49,10 @@ def test_invalid_clabe(clabe: Clabe, expected_message: str) -> None:
         Cuenta(clabe=clabe)
     assert expected_message in str(exc.value)
 
+
 def test_get_json_schema() -> None:
     from pydantic import TypeAdapter
+
     adapter = TypeAdapter(Clabe)
     schema = adapter.json_schema()
     assert schema == {
