@@ -1,13 +1,10 @@
 import random
 from typing import List, Union
 
+from pydantic import BaseModel, Field, validator
 from pydantic.errors import NotDigitError
 
 from .banks import BANK_NAMES, BANKS
-from .errors import (
-    BankCodeABMAlreadyExistsError,
-    BankCodeBanxicoAlreadyExistsError,
-)
 
 CLABE_LENGTH = 18
 CLABE_WEIGHTS = [3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7, 1, 3, 7]
@@ -69,42 +66,33 @@ def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
     return clabes
 
 
+class BankConfigRequest(BaseModel):
+    bank_code_abm: str = Field(..., description="The ABM code for the bank")
+    bank_code_banxico: str = Field(
+        ..., description="The Banxico code for the bank"
+    )
+    bank_name: str = Field(..., description="The name of the bank")
+
+    @validator('bank_code_abm', 'bank_code_banxico')
+    def validate_numeric_codes(cls, v: str) -> str:
+        if not v.isdigit():
+            raise NotDigitError
+        return v
+
+    @validator('bank_name')
+    def validate_bank_name(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("bank_name cannot be empty")
+        return v.strip()
+
+
 def configure_additional_bank(
     bank_code_abm: str, bank_code_banxico: str, bank_name: str
 ) -> None:
-    """
-    Configures an additional bank.
-
-    Args:
-        bank_code_abm (str): The ABM code for the bank.
-        bank_code_banxico (str): The Banxico code for the bank.
-        bank_name (str): The name of the bank.
-
-    Raises:
-        ValueError: If the bank_code_abm or bank_code_banxico
-        already exists in the provided dictionaries.
-    """
-
-    if not all(
-        isinstance(x, str)
-        for x in [bank_code_abm, bank_code_banxico, bank_name]
-    ):
-        raise TypeError("All parameters must be strings")
-
-    if not bank_code_abm.isdigit():
-        raise NotDigitError
-
-    if not bank_code_banxico.isdigit():
-        raise NotDigitError
-
-    if not bank_name.strip():
-        raise ValueError("bank_name cannot be empty")
-
-    if bank_code_abm in BANKS:
-        raise BankCodeABMAlreadyExistsError
-
-    if bank_code_banxico in BANK_NAMES:
-        raise BankCodeBanxicoAlreadyExistsError
-
-    BANKS[bank_code_abm] = bank_code_banxico
-    BANK_NAMES[bank_code_banxico] = bank_name.strip()
+    request = BankConfigRequest(
+        bank_code_abm=bank_code_abm,
+        bank_code_banxico=bank_code_banxico,
+        bank_name=bank_name,
+    )
+    BANKS[request.bank_code_abm] = request.bank_code_banxico
+    BANK_NAMES[request.bank_code_banxico] = request.bank_name

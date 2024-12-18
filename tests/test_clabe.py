@@ -7,10 +7,6 @@ from clabe import (
     get_bank_name,
     validate_clabe,
 )
-from clabe.errors import (
-    BankCodeABMAlreadyExistsError,
-    BankCodeBanxicoAlreadyExistsError,
-)
 
 VALID_CLABE = '002000000000000008'
 INVALID_CLABE_CONTROL_DIGIT = '002000000000000007'
@@ -43,29 +39,30 @@ def test_generate_new_clabes():
         assert validate_clabe(clabe)
 
 
-def test_configure_additional_bank_success():
-    configure_additional_bank("777", "713", "New Bank")
-    assert get_bank_name('777') == 'New Bank'
+@pytest.mark.parametrize(
+    'abm_code, banxico_code, name',
+    [
+        ('713', '90713', 'Cuenca DMZ'),
+        ('777', '713', 'Cuenca Gem DMZ'),
+        ('666', '723', 'Cuenca Gem Beta'),
+    ],
+)
+def test_configure_additional_bank_success(abm_code, banxico_code, name):
+    configure_additional_bank(abm_code, banxico_code, name)
+    assert get_bank_name(abm_code) == name
 
 
-def test_configure_additional_bank_existing_abm_code():
-    with pytest.raises(BankCodeABMAlreadyExistsError):
-        configure_additional_bank("002", "40002", "Banamex")
-
-
-def test_configure_additional_bank_existing_banxico_code():
-    with pytest.raises(BankCodeBanxicoAlreadyExistsError):
-        configure_additional_bank("666", "40137", "New Bank")
-
-
-def test_configure_additional_bank_invalid_inputs():
-    with pytest.raises(TypeError):
-        configure_additional_bank(3, 3, 3)
+@pytest.mark.parametrize(
+    'abm_code, banxico_code, name',
+    [
+        ('A', 'B', 'C'),  # Invalid format for both codes
+        ('666', 'B', 'Test Bank'),  # Valid ABM code, invalid Banxico code
+        ('777', '713', ''),  # Valid codes, empty name
+        ('abc', 'def', 'Test Bank'),  # Non-numeric codes
+    ],
+)
+def test_configure_additional_bank_invalid_inputs(
+    abm_code, banxico_code, name
+):
     with pytest.raises(ValueError):
-        configure_additional_bank("A", "B", "C")
-    with pytest.raises(ValueError):
-        configure_additional_bank("666", "B", "C")
-    with pytest.raises(ValueError):
-        configure_additional_bank("777", "713", "")
-    with pytest.raises(ValueError):
-        configure_additional_bank("abc", "def", "Test Bank")
+        configure_additional_bank(abm_code, banxico_code, name)
