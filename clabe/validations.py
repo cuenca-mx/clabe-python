@@ -1,6 +1,9 @@
 import random
 from typing import List, Union
 
+from pydantic import BaseModel, Field, validator
+from pydantic.errors import NotDigitError
+
 from .banks import BANK_NAMES, BANKS
 
 CLABE_LENGTH = 18
@@ -61,3 +64,35 @@ def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
         assert validate_clabe(clabe)
         clabes.append(clabe)
     return clabes
+
+
+class BankConfigRequest(BaseModel):
+    bank_code_abm: str = Field(..., description="The ABM code for the bank")
+    bank_code_banxico: str = Field(
+        ..., description="The Banxico code for the bank"
+    )
+    bank_name: str = Field(..., description="The name of the bank")
+
+    @validator('bank_code_abm', 'bank_code_banxico')
+    def validate_numeric_codes(cls, v: str) -> str:
+        if not v.isdigit():
+            raise NotDigitError
+        return v
+
+    @validator('bank_name')
+    def validate_bank_name(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("bank_name cannot be empty")
+        return v.strip()
+
+
+def configure_additional_bank(
+    bank_code_abm: str, bank_code_banxico: str, bank_name: str
+) -> None:
+    request = BankConfigRequest(
+        bank_code_abm=bank_code_abm,
+        bank_code_banxico=bank_code_banxico,
+        bank_name=bank_name,
+    )
+    BANKS[request.bank_code_abm] = request.bank_code_banxico
+    BANK_NAMES[request.bank_code_banxico] = request.bank_name
