@@ -10,7 +10,7 @@ https://es.wikipedia.org/wiki/CLABE
 
 ## Requerimientos
 
-Python 3.6 o superior.
+Python 3.8 o superior.
 
 ## Instalación
 
