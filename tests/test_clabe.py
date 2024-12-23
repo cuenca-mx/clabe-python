@@ -5,6 +5,7 @@ from clabe import (
     configure_additional_bank,
     generate_new_clabes,
     get_bank_name,
+    remove_bank,
     validate_clabe,
 )
 
@@ -64,3 +65,9 @@ def test_configure_additional_bank_success(abm_code, banxico_code, name):
 def test_configure_additional_bank_invalid_inputs(banxico_code, name):
     with pytest.raises(ValueError):
         configure_additional_bank(banxico_code, name)
+
+
+def test_remove_bank():
+    remove_bank('40138')
+    with pytest.raises(ValueError):
+        get_bank_name('138')

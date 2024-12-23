@@ -98,3 +98,18 @@ def configure_additional_bank(bank_code_banxico: str, bank_name: str) -> None:
     )
     BANKS[request.bank_code_abm] = request.bank_code_banxico
     BANK_NAMES[request.bank_code_banxico] = request.bank_name
+
+
+def remove_bank(bank_code_banxico: str) -> None:
+    bank_code_abm = next(
+        (
+            abm
+            for abm, banxico in BANKS.items()
+            if banxico == bank_code_banxico
+        ),
+        None,
+    )
+
+    if bank_code_abm:
+        BANKS.pop(bank_code_abm)
+        BANK_NAMES.pop(bank_code_banxico)

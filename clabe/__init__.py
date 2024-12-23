@@ -8,6 +8,7 @@ __all__ = [
     'get_bank_name',
     'validate_clabe',
     'configure_additional_bank',
+    'remove_bank',
 ]
 
 from .banks import BANK_NAMES, BANKS
@@ -17,6 +18,7 @@ from .validations import (
     configure_additional_bank,
     generate_new_clabes,
     get_bank_name,
+    remove_bank,
     validate_clabe,
 )
 from .version import __version__
