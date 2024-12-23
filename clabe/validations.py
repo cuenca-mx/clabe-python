@@ -1,8 +1,8 @@
 import random
+import re
 from typing import List, Union
 
 from pydantic import BaseModel, Field, validator
-from pydantic.errors import NotDigitError
 
 from .banks import BANK_NAMES, BANKS
 
@@ -67,30 +67,32 @@ def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
 
 
 class BankConfigRequest(BaseModel):
-    bank_code_abm: str = Field(..., description="The ABM code for the bank")
-    bank_code_banxico: str = Field(
-        ..., description="The Banxico code for the bank"
+    bank_name: str = Field(
+        min_length=1,
+        strip_whitespace=True,
+        description="The name of the bank - cannot be empty",
     )
-    bank_name: str = Field(..., description="The name of the bank")
 
-    @validator('bank_code_abm', 'bank_code_banxico')
-    def validate_numeric_codes(cls, v: str) -> str:
-        if not v.isdigit():
-            raise NotDigitError
-        return v
+    bank_code_banxico: str = Field(
+        min_length=5, max_length=5, description="The Banxico code for the bank"
+    )
 
-    @validator('bank_name')
-    def validate_bank_name(cls, v: str) -> str:
-        if not v.strip():
-            raise ValueError("bank_name cannot be empty")
-        return v.strip()
+    @validator("bank_code_banxico")
+    def validate_bank_code(cls, value):
+        if not re.fullmatch(r"\d{5}", value):
+            raise ValueError(
+                "bank_code_banxico must be a string of exactly 5 digits"
+            )
+        return value
+
+    @property
+    def bank_code_abm(self):
+        return self.bank_code_banxico[-3:]
 
 
-def configure_additional_bank(
-    bank_code_abm: str, bank_code_banxico: str, bank_name: str
-) -> None:
+def configure_additional_bank(bank_code_banxico: str, bank_name: str) -> None:
+
     request = BankConfigRequest(
-        bank_code_abm=bank_code_abm,
         bank_code_banxico=bank_code_banxico,
         bank_name=bank_name,
     )

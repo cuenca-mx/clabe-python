@@ -43,26 +43,24 @@ def test_generate_new_clabes():
     'abm_code, banxico_code, name',
     [
         ('713', '90713', 'Cuenca DMZ'),
-        ('777', '713', 'Cuenca Gem DMZ'),
-        ('666', '723', 'Cuenca Gem Beta'),
+        ('714', '90714', 'Cuenca Gem DMZ'),
+        ('715', '90715', 'Cuenca Gem Beta'),
     ],
 )
 def test_configure_additional_bank_success(abm_code, banxico_code, name):
-    configure_additional_bank(abm_code, banxico_code, name)
+    configure_additional_bank(banxico_code, name)
     assert get_bank_name(abm_code) == name
 
 
 @pytest.mark.parametrize(
-    'abm_code, banxico_code, name',
+    'banxico_code, name',
     [
-        ('A', 'B', 'C'),  # Invalid format for both codes
-        ('666', 'B', 'Test Bank'),  # Valid ABM code, invalid Banxico code
-        ('777', '713', ''),  # Valid codes, empty name
-        ('abc', 'def', 'Test Bank'),  # Non-numeric codes
+        ('1234', 'Test Bank'),  # invalid Banxico code 4 digits
+        ('123456', 'Test Bank'),  # invalid Banxico code 6 digits
+        ('12345', ''),  # Valid code, empty name
+        ('123AT', 'Test Bank'),  # Non-numeric codes
     ],
 )
-def test_configure_additional_bank_invalid_inputs(
-    abm_code, banxico_code, name
-):
+def test_configure_additional_bank_invalid_inputs(banxico_code, name):
     with pytest.raises(ValueError):
-        configure_additional_bank(abm_code, banxico_code, name)
+        configure_additional_bank(banxico_code, name)
