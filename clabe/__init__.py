@@ -7,15 +7,15 @@ __all__ = [
     'generate_new_clabes',
     'get_bank_name',
     'validate_clabe',
-    'configure_additional_bank',
+    'add_bank',
     'remove_bank',
 ]
 
 from .banks import BANK_NAMES, BANKS
 from .types import Clabe
 from .validations import (
+    add_bank,
     compute_control_digit,
-    configure_additional_bank,
     generate_new_clabes,
     get_bank_name,
     remove_bank,

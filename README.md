@@ -58,7 +58,7 @@ import clabe
 clabe.generate_new_clabes(10, '002123456')
 ```
 
-### Para agregar un nuevo banco
+## Para agregar un nuevo banco
 
 A partir de la versión 2.0.0, el paquete se actualizará a **Pydantic v2**, lo que significa que las versiones anteriores ya no recibirán soporte.
 

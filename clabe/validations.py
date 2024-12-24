@@ -1,8 +1,7 @@
 import random
-import re
 from typing import List, Union
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 
 from .banks import BANK_NAMES, BANKS
 
@@ -67,31 +66,37 @@ def generate_new_clabes(number_of_clabes: int, prefix: str) -> List[str]:
 
 
 class BankConfigRequest(BaseModel):
+    """
+    Validates and processes bank configuration requests.
+
+    The class handles validation of bank names and codes, ensuring:
+    - Bank names are non-empty strings
+    - Banxico codes are exactly 5 digits
+    """
+
     bank_name: str = Field(
         min_length=1,
         strip_whitespace=True,
-        description="The name of the bank - cannot be empty",
+        description="Bank name must have at least 1 character.",
     )
 
     bank_code_banxico: str = Field(
-        min_length=5, max_length=5, description="The Banxico code for the bank"
+        regex=r"^\d{5}$", description="Banxico code must be a 5-digit string."
     )
-
-    @validator("bank_code_banxico")
-    def validate_bank_code(cls, value):
-        if not re.fullmatch(r"\d{5}", value):
-            raise ValueError(
-                "bank_code_banxico must be a string of exactly 5 digits"
-            )
-        return value
 
     @property
     def bank_code_abm(self):
         return self.bank_code_banxico[-3:]
 
 
-def configure_additional_bank(bank_code_banxico: str, bank_name: str) -> None:
+def add_bank(bank_code_banxico: str, bank_name: str) -> None:
+    """
+    Add a bank configuration.
 
+    Args:
+        bank_code_banxico: 5-digit Banxico bank code
+        bank_name: Bank name
+    """
     request = BankConfigRequest(
         bank_code_banxico=bank_code_banxico,
         bank_name=bank_name,
@@ -101,15 +106,11 @@ def configure_additional_bank(bank_code_banxico: str, bank_name: str) -> None:
 
 
 def remove_bank(bank_code_banxico: str) -> None:
-    bank_code_abm = next(
-        (
-            abm
-            for abm, banxico in BANKS.items()
-            if banxico == bank_code_banxico
-        ),
-        None,
-    )
+    """
+    Remove a bank configuration by its Banxico code.
 
-    if bank_code_abm:
-        BANKS.pop(bank_code_abm)
-        BANK_NAMES.pop(bank_code_banxico)
+    Args:
+        bank_code_banxico: 5-digit Banxico bank code
+    """
+    BANKS.pop(bank_code_banxico[-3:], None)
+    BANK_NAMES.pop(bank_code_banxico, None)
