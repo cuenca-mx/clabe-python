@@ -66,7 +66,7 @@ Sin embargo, hemos añadido una función para agregar bancos adicionales a la li
 
 ```python
 import clabe
-clabe.configure_additional_bank('12345', 'New Bank')
+clabe.add_bank('12345', 'New Bank')
 ```
 
 Para eliminar un banco
