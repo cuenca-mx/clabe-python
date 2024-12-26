@@ -1,4 +1,4 @@
-from pydantic.errors import PydanticValueError
+from pydantic.v1.errors import PydanticValueError
 
 
 class BankCodeValidationError(PydanticValueError):
