@@ -57,3 +57,21 @@ Para generar nuevo válido CLABES
 import clabe
 clabe.generate_new_clabes(10, '002123456')
 ```
+
+## Para agregar un nuevo banco
+
+A partir de la versión 2.0.0, el paquete se actualizará a **Pydantic v2**, lo que significa que las versiones anteriores ya no recibirán soporte.
+
+Sin embargo, hemos añadido una función para agregar bancos adicionales a la lista, en caso de que sea necesario. Esto se puede hacer sin necesidad de crear un PR. Para agregar un banco, simplemente llama a la siguiente función con el código de Banxico y el nombre del banco:
+
+```python
+import clabe
+clabe.add_bank('12345', 'New Bank')
+```
+
+Para eliminar un banco
+
+```python
+import clabe
+clabe.remove_bank('12345')
+```
