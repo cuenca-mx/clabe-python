@@ -21,6 +21,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     include_package_data=True,
     package_data=dict(clabe=['py.typed']),
+    python_requires='>=3.8',
     install_requires=['pydantic>=2.10.3'],
     classifiers=[
         'Programming Language :: Python :: 3',
