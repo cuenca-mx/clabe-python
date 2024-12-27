@@ -1,31 +1,10 @@
 from typing import Any, ClassVar, Dict, Type
 
-<<<<<<< HEAD
-from pydantic.v1.errors import NotDigitError
-from pydantic.v1.validators import (
-    constr_length_validator,
-    constr_strip_whitespace,
-    str_validator,
-)
-=======
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
 from pydantic_core import PydanticCustomError, core_schema
->>>>>>> 3f790a9 (Upgrade Python version requirements and dependencies)
 
 from .validations import BANK_NAMES, BANKS, compute_control_digit
 
-<<<<<<< HEAD
-if TYPE_CHECKING:
-    from pydantic.v1.typing import CallableGenerator
-
-
-def validate_digits(v: str) -> str:
-    if not v.isdigit():
-        raise NotDigitError
-    return v
-
-=======
->>>>>>> 3f790a9 (Upgrade Python version requirements and dependencies)
 
 class Clabe(str):
     """
