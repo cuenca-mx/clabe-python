@@ -4,7 +4,7 @@ from pydantic import BaseModel, ValidationError
 from clabe import BANK_NAMES, BANKS
 from clabe.types import Clabe
 
-VALID_CLABE = '646180157042875763'
+VALID_CLABE = '723123456682660854'
 
 
 class Cuenta(BaseModel):
@@ -13,9 +13,9 @@ class Cuenta(BaseModel):
 
 def test_valid_clabe():
     cuenta = Cuenta(clabe=VALID_CLABE)
-    assert cuenta.clabe.bank_code_abm == '646'
-    assert cuenta.clabe.bank_code_banxico == BANKS['646']
-    assert cuenta.clabe.bank_name == BANK_NAMES[BANKS['646']]
+    assert cuenta.clabe.bank_code_abm == '723'
+    assert cuenta.clabe.bank_code_banxico == BANKS['723']
+    assert cuenta.clabe.bank_name == BANK_NAMES[BANKS['723']]
     assert cuenta.clabe.bank_code == cuenta.clabe.bank_code_banxico
 
 
@@ -31,6 +31,16 @@ def test_valid_clabe():
             '9' * 17,
             'String should have at least 18 characters',
             id='invalid_bank_code_abm',
+        ),
+        pytest.param(
+            '9' * 17,
+            'String should have at least 18 characters',
+            id='invalid_bank_length',
+        ),
+        pytest.param(
+            '9' * 19,
+            'String should have at most 18 characters',
+            id='invalid_bank_length',
         ),
         pytest.param(
             '111180157042875763',

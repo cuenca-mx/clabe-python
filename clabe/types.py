@@ -1,19 +1,17 @@
-from typing import Any, ClassVar, Dict, Type
+from typing import Any, Dict, Type
 
 from pydantic import GetCoreSchemaHandler, GetJsonSchemaHandler
 from pydantic_core import PydanticCustomError, core_schema
 
 from .validations import BANK_NAMES, BANKS, compute_control_digit
 
+CLABE_LENGTH = 18
+
 
 class Clabe(str):
     """
     Based on: https://es.wikipedia.org/wiki/CLABE
     """
-
-    strip_whitespace: ClassVar[bool] = True
-    min_length: ClassVar[int] = 18
-    max_length: ClassVar[int] = 18
 
     def __init__(self, clabe: str) -> None:
         self.bank_code_abm = clabe[:3]
@@ -48,9 +46,9 @@ class Clabe(str):
         return core_schema.no_info_after_validator_function(
             cls._validate,
             core_schema.str_schema(
-                min_length=cls.min_length,
-                max_length=cls.max_length,
-                strip_whitespace=cls.strip_whitespace,
+                min_length=CLABE_LENGTH,
+                max_length=CLABE_LENGTH,
+                strip_whitespace=True,
             ),
         )
 
