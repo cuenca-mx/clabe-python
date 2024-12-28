@@ -30,11 +30,6 @@ def test_valid_clabe():
         pytest.param(
             '9' * 17,
             'String should have at least 18 characters',
-            id='invalid_bank_code_abm',
-        ),
-        pytest.param(
-            '9' * 17,
-            'String should have at least 18 characters',
             id='invalid_bank_length',
         ),
         pytest.param(
