@@ -32,8 +32,7 @@ $ make test
 
 ### Como tipo personalizado en un modelo de Pydantic
 
-```
-python
+```python
 from pydantic import BaseModel, ValidationError
 
 from clabe import Clabe
