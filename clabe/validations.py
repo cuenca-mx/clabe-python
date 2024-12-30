@@ -81,7 +81,8 @@ class BankConfigRequest(BaseModel):
     )
 
     bank_code_banxico: str = Field(
-        regex=r"^\d{5}$", description="Banxico code must be a 5-digit string."
+        pattern=r"^\d{5}$",
+        description="Banxico code must be a 5-digit string.",
     )
 
     @property
