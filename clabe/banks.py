@@ -96,7 +96,7 @@ BANKS = {
 
 # Descargado de https://www.banxico.org.mx/cep-scl/listaInstituciones.do
 # 2022-10-18
-''' The order of the banks must be alphabetical by bank name '''
+# The order of the banks must be alphabetical by bank name
 BANK_NAMES = {
     '40138': 'ABC Capital',
     '40133': 'Actinver',
