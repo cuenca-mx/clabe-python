@@ -96,6 +96,7 @@ BANKS = {
 
 # Descargado de https://www.banxico.org.mx/cep-scl/listaInstituciones.do
 # 2022-10-18
+''' The order of the banks must be alphabetical by bank name '''
 BANK_NAMES = {
     '40138': 'ABC Capital',
     '40133': 'Actinver',
@@ -127,6 +128,7 @@ BANK_NAMES = {
     '40112': 'Bmonex',
     '90677': 'Caja Pop Mexica',
     '90683': 'Caja Telefonist',
+    '90715': 'Cartera Digital',
     '90630': 'CB Intercam',
     '40124': 'CBM Banco',
     '40143': 'CI Banco',
@@ -188,5 +190,4 @@ BANK_NAMES = {
     '90608': 'Vector',
     '40113': 'Ve Por Mas',
     '40141': 'Volkswagen',
-    '90715': 'Cartera Digital',
 }
