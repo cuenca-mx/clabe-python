@@ -188,5 +188,5 @@ BANK_NAMES = {
     '90608': 'Vector',
     '40113': 'Ve Por Mas',
     '40141': 'Volkswagen',
-    '90715': 'Cartera Digital WalMart',
+    '90715': 'Cartera Digital',
 }
