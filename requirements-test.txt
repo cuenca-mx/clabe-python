@@ -4,3 +4,4 @@ black==22.8.0
 isort==5.11.5
 flake8==5.0.4
 mypy==1.4.1
+requests==2.32.3
