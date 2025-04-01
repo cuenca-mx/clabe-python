@@ -50,5 +50,7 @@ release: test clean
 	python setup.py sdist bdist_wheel
 	twine upload dist/*
 
+compare-banks:
+	PYTHONPATH=. python scripts/compare_banks.py
 
-.PHONY: all install-test test format lint clean release
+.PHONY: all install-test test format lint clean release compare-banks
