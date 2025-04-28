@@ -128,7 +128,7 @@ BANK_NAMES = {
     '90715': 'Cartera Digital',
     '90630': 'CB Intercam',
     '40124': 'Citi Mexico',
-    '40143': 'CI Banco',
+    '40143': 'CIBanco',
     '90631': 'CI Bolsa',
     '90901': 'Cls',
     '90903': 'CoDi Valida',
