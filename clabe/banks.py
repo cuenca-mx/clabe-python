@@ -88,6 +88,7 @@ BANKS = {
     '141': '40141',
     '715': '90715',
     '732': '90732',
+    '734': '90734',
 }
 
 
@@ -95,10 +96,9 @@ BANKS = {
 # 2022-10-18
 # The order of the banks must be alphabetical by bank name
 BANK_NAMES = {
-    '40138': 'ABC Capital',
     '40133': 'Actinver',
     '40062': 'Afirme',
-    '90706': 'Arcus',
+    '90706': 'Arcus Fi',
     '90659': 'Asp Integra Opc',
     '40128': 'Autofin',
     '40127': 'Azteca',
@@ -141,6 +141,7 @@ BANK_NAMES = {
     '40151': 'Donde',
     '90616': 'Finamex',
     '90634': 'Fincomun',
+    '90734': 'Finco Pay',
     '90689': 'Fomped',
     '90699': 'Fondeadora',
     '90685': 'Fondo (Fira)',
@@ -178,6 +179,7 @@ BANK_NAMES = {
     '90646': 'STP',
     '90703': 'Tesored',
     '90684': 'Transfer',
+    '40138': 'Uala',
     '90656': 'Unagra',
     '90617': 'Valmex',
     '90605': 'Value',
