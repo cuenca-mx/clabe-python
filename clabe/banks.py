@@ -89,6 +89,8 @@ BANKS = {
     '715': '90715',
     '732': '90732',
     '734': '90734',
+    '167': '40167',
+    '721': '90721',
 }
 
 
@@ -98,6 +100,7 @@ BANKS = {
 BANK_NAMES = {
     '40133': 'Actinver',
     '40062': 'Afirme',
+    '90721': 'Albo',
     '90706': 'Arcus Fi',
     '90659': 'Asp Integra Opc',
     '40128': 'Autofin',
@@ -146,6 +149,7 @@ BANK_NAMES = {
     '90699': 'Fondeadora',
     '90685': 'Fondo (Fira)',
     '90601': 'Gbm',
+    '40167': 'Hey Banco',
     '37168': 'Hipotecaria Fed',
     '40021': 'HSBC',
     '40155': 'Icbc',
