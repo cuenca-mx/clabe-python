@@ -103,7 +103,7 @@ import clabe
 clabe.add_bank('12345', 'New Bank')
 ```
 
-### Cómo eliminar un banco
+### Cómo eliminar un banco
 
 De manera similar, puedes eliminar un banco llamando a la función remove_bank con el código del banco que deseas eliminar.
 
@@ -113,3 +113,36 @@ clabe.remove_bank('12345')
 ```
 
 **Nota**: Aunque estas funciones están disponibles para un uso más flexible, recomendamos utilizar siempre la lista oficial de bancos actualizada en la versión 2+.
+
+## Mantener actualizada la lista de participantes
+
+Para mantener sincronizada la lista de participantes del SPEI con la información oficial de Banxico, este repositorio incluye un script que compara automáticamente los datos locales con la lista actualizada de instituciones financieras.
+
+### Verificar cambios en la lista de participantes
+
+El script `compare_banks.py` detecta:
+
+- **Nuevos participantes**: Instituciones que aparecen en Banxico pero no están en el paquete
+- **Bajas de participantes**: Instituciones que ya no aparecen en la lista oficial de Banxico
+- **Cambios de nombre**: Participantes que mantienen el mismo código pero han cambiado su nombre
+
+Para ejecutar la verificación:
+
+```bash
+export PYTHONPATH=$(pwd)
+python scripts/compare_banks.py
+```
+
+### Interpretar los resultados
+
+El script mostrará un reporte con las diferencias encontradas:
+
+- **ADDITIONS**: Nuevos participantes que deben agregarse al archivo `clabe/banks.py`
+- **REMOVALS**: Participantes que deben eliminarse por ya no estar activos
+- **CHANGES**: Cambios de nombre que requieren actualización
+
+Si no hay diferencias, el script confirmará que los datos están sincronizados.
+
+### Actualizar la lista de participantes
+
+Una vez identificados los cambios, actualiza manualmente el archivo `clabe/banks.py` y crea un pull request para mantener la lista actualizada.
