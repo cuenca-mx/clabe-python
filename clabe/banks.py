@@ -128,7 +128,7 @@ BANK_NAMES = {
     '40112': 'Bmonex',
     '90677': 'Caja Pop Mexica',
     '90683': 'Caja Telefonist',
-    '90715': 'Cartera Digital',
+    '90715': 'Cashi Cuenta',
     '90630': 'CB Intercam',
     '40124': 'Citi Mexico',
     '40143': 'CIBanco',
