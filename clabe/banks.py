@@ -92,6 +92,8 @@ BANKS = {
     '734': '90734',
     '167': '40167',
     '721': '90721',
+    '727': '90727',
+    '738': '90738',
 }
 
 
@@ -146,6 +148,7 @@ BANK_NAMES = {
     '90616': 'Finamex',
     '90634': 'Fincomun',
     '90734': 'Finco Pay',
+    '90738': 'Fintoc',
     '90689': 'Fomped',
     '90699': 'Fondeadora',
     '90685': 'Fondo (Fira)',
@@ -185,6 +188,7 @@ BANK_NAMES = {
     '90646': 'STP',
     '90703': 'Tesored',
     '90684': 'Transfer',
+    '90727': 'Transfer directo',
     '40138': 'Uala',
     '90656': 'Unagra',
     '90617': 'Valmex',
