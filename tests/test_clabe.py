@@ -48,11 +48,12 @@ def test_generate_new_clabes():
         ('713', '90713', 'Cuenca DMZ'),
         ('714', '90714', 'Cuenca Gem DMZ'),
         ('715', '90715', 'Cuenca Gem Beta'),
+        ('717', '90717', ' Cuenca Spaces '),
     ],
 )
 def test_add_bank_success(abm_code, banxico_code, name):
     add_bank(banxico_code, name)
-    assert get_bank_name(abm_code) == name
+    assert get_bank_name(abm_code) == name.strip()
 
 
 @pytest.mark.parametrize(
@@ -61,6 +62,7 @@ def test_add_bank_success(abm_code, banxico_code, name):
         ('1234', 'Test Bank'),  # invalid Banxico code 4 digits
         ('123456', 'Test Bank'),  # invalid Banxico code 6 digits
         ('12345', ''),  # Valid code, empty name
+        ('12345', '   '),  # Valid code, whitespace-only name
         ('123AT', 'Test Bank'),  # Non-numeric codes
     ],
 )
