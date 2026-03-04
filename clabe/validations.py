@@ -1,7 +1,8 @@
 import random
-from typing import Any, List, Union
+from typing import List, Union
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, StringConstraints
+from typing_extensions import Annotated
 
 from .banks import BANK_NAMES, BANKS
 
@@ -74,8 +75,13 @@ class BankConfigRequest(BaseModel):
     - Banxico codes are exactly 5 digits
     """
 
-    bank_name: str = Field(
-        min_length=1,
+    bank_name: Annotated[
+        str,
+        StringConstraints(
+            strip_whitespace=True,
+            min_length=1,
+        ),
+    ] = Field(
         description="Bank name must have at least 1 character.",
     )
 
@@ -83,13 +89,6 @@ class BankConfigRequest(BaseModel):
         pattern=r"^\d{5}$",
         description="Banxico code must be a 5-digit string.",
     )
-
-    @field_validator('bank_name', mode='before')
-    @classmethod
-    def strip_bank_name(cls, value: Any) -> Any:
-        if isinstance(value, str):
-            return value.strip()
-        return value
 
     @property
     def bank_code_abm(self):
