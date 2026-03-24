@@ -1,3 +1,4 @@
+import warnings
 import pytest
 
 from clabe import (
@@ -54,6 +55,12 @@ def test_add_bank_success(abm_code, banxico_code, name):
     add_bank(banxico_code, name)
     assert get_bank_name(abm_code) == name
 
+
+def test_add_bank_no_show_warnings():
+    with warnings.catch_warnings(record=True) as caught_warnings:
+        warnings.simplefilter("always")
+        add_bank("90716", "Test bank")
+        assert len(caught_warnings) == 0, "Warnings were emitted during add_bank"
 
 @pytest.mark.parametrize(
     'banxico_code, name',

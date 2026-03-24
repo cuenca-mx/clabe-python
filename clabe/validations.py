@@ -76,8 +76,10 @@ class BankConfigRequest(BaseModel):
 
     bank_name: str = Field(
         min_length=1,
-        strip_whitespace=True,
         description="Bank name must have at least 1 character.",
+        json_schema_extra={
+            "strip_whitespace": True,
+        }
     )
 
     bank_code_banxico: str = Field(

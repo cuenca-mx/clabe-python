@@ -1,3 +1,4 @@
+import warnings
 import pytest
 from pydantic import BaseModel, ValidationError
 
@@ -18,6 +19,12 @@ def test_valid_clabe():
     assert cuenta.clabe.bank_name == BANK_NAMES[BANKS['723']]
     assert cuenta.clabe.bank_code == cuenta.clabe.bank_code_banxico
 
+
+def test_valid_clabe_shows_no_warnings():
+    with warnings.catch_warnings(record=True) as caught_warnings:
+        warnings.simplefilter("always")
+        Cuenta(clabe=VALID_CLABE)
+        assert len(caught_warnings) == 0, "Warnings were emitted during CLABE test"
 
 @pytest.mark.parametrize(
     'clabe,expected_message',
