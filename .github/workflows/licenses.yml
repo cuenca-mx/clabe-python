@@ -22,7 +22,7 @@ jobs:
           python-version: 3.8
       - name: Install and run pip-licenses
         run: |
-          pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.io:8081
+          pip config set global.extra-index-url https://$PYPI_USERNAME:$PYPI_PASSWORD@pypi.cuenca.com:8081
           make install-test
           pip install pip-licenses
           pip-licenses --format=csv --output-file licence_compliance.csv
